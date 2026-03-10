@@ -1,27 +1,11 @@
 import * as THREE from "three";
 import { VRButton } from "VRButton";
 import { DeviceOrientationControls } from "DeviceOrientationControls";
-import { GLTFLoader } from "GLTFLoader";
-import { DRACOLoader } from "DRACOLoader";
 
-let vrScene = null;
-let vrCamera = null;
 let vrControls = null;
 let isActive = false;
+let savedCameraState = { pos: new THREE.Vector3(), target: new THREE.Vector3() };
 
-// Fixe Raum-Konfiguration für das SensAble Lab
-const vrRoomConfig = {
-    "room": "raummodell_leer.glb",
-    "furniture": [
-        {"typeId":"k6","exportId":"e93d407f","x":-1.94,"z":-1.59,"rot":0},
-        {"typeId":"k6","exportId":"e9c980e3","x":2.06,"z":-1.31,"rot":0.78},
-        {"typeId":"k6","exportId":"30122678","x":-1.95,"z":1.95,"rot":0.78},
-        {"typeId":"k6","exportId":"66b4d1ff","x":1.95,"z":1.95,"rot":0},
-        {"typeId":"board","exportId":"0c65ec5f","x":0,"z":-3.85,"rot":0}
-    ]
-};
-
-// Modul-interner Ladebildschirm (Unabhängig von ui.js)
 function showVRLoader(show, text = 'Lade 3D-Assets...') {
     let loader = document.getElementById('vr-local-loader');
     if (show) {
@@ -55,24 +39,27 @@ function showVRLoader(show, text = 'Lade 3D-Assets...') {
     }
 }
 
-// Intelligentes Verstecken der Haupt-UI (ignoriert den Canvas-Container)
+// Sauberes UI-Management (Verhindert Popup-Chaos!)
 function toggleMainUI(show) {
-    if (!window.app.renderer) return;
-    const canvas = window.app.renderer.domElement;
-    const children = document.body.children;
+    const uiLayer = document.getElementById('ui-layer');
+    const homeScreen = document.getElementById('homescreen');
+    const overlay = document.getElementById('modal-overlay');
+    const scenarioLayer = document.getElementById('scenario-ui-layer');
     
-    for (let i = 0; i < children.length; i++) {
-        const el = children[i];
-        if (el.tagName !== 'SCRIPT' && el.id !== 'vr-overlay' && el.id !== 'main-vr-trigger' && el.id !== 'vr-local-loader' && !el.contains(canvas)) {
-            if (show) {
-                el.style.display = el.dataset.vrHiddenDisplay || '';
-            } else {
-                if (el.style.display !== 'none') {
-                    el.dataset.vrHiddenDisplay = el.style.display;
-                    el.style.display = 'none';
-                }
-            }
+    if (show) {
+        // Beim Beenden leiten wir sicher zum Homescreen (SensAble Lab) zurück
+        if (window.app && typeof window.app.goHome === 'function') {
+            window.app.goHome(); 
+        } else {
+            if(homeScreen) homeScreen.style.display = 'flex';
         }
+        if(overlay) overlay.classList.remove('active');
+    } else {
+        // Vor dem VR Start alles ausblenden
+        if(uiLayer) uiLayer.style.display = 'none';
+        if(homeScreen) homeScreen.style.display = 'none';
+        if(scenarioLayer) scenarioLayer.style.display = 'none';
+        if(overlay) overlay.classList.remove('active');
     }
 }
 
@@ -83,62 +70,11 @@ async function enterFullscreenAndLandscape() {
         else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
         
         if (screen.orientation && screen.orientation.lock) {
-            await screen.orientation.lock('landscape');
+            await screen.orientation.lock('landscape').catch(()=>{}); 
         }
     } catch (err) {
-        console.warn("Fullscreen/Orientation lock failed. Eventuell wegen iOS-Restriktionen.", err);
-        const promptEl = document.getElementById('vr-landscape-prompt');
-        if (promptEl) {
-            promptEl.style.display = 'flex';
-            setTimeout(() => { promptEl.style.display = 'none'; }, 4000);
-        }
+        console.warn("Fullscreen/Orientation lock failed. Eventuell wegen Browser-Restriktionen.", err);
     }
-}
-
-async function loadVRRoom() {
-    return new Promise((resolve) => {
-        const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath('./lib/draco/');
-        const gltfLoader = new GLTFLoader();
-        gltfLoader.setDRACOLoader(dracoLoader);
-
-        let loadedCount = 0;
-        const totalItems = 1 + vrRoomConfig.furniture.length;
-
-        const checkDone = () => {
-            loadedCount++;
-            if (loadedCount >= totalItems) {
-                setTimeout(resolve, 300);
-            }
-        };
-
-        const loadModel = (filename, x, y, z, rot) => {
-            try {
-                gltfLoader.load(`./${filename}`, (gltf) => {
-                    const model = gltf.scene;
-                    model.position.set(x, y, z);
-                    model.rotation.y = rot;
-                    vrScene.add(model);
-                    checkDone();
-                }, undefined, (error) => {
-                    console.error(`Fehler beim Laden von ${filename}:`, error);
-                    checkDone(); 
-                });
-            } catch (err) {
-                console.error(`Kritischer Fehler beim Starten des Ladevorgangs für ${filename}:`, err);
-                checkDone();
-            }
-        };
-
-        // Raum laden
-        loadModel(vrRoomConfig.room, 0, 0, 0, 0);
-
-        // Möbel laden
-        vrRoomConfig.furniture.forEach(item => {
-            const filename = item.typeId.endsWith('.glb') ? item.typeId : `${item.typeId}.glb`;
-            loadModel(filename, item.x, 0.22, item.z, item.rot);
-        });
-    });
 }
 
 function initOverlayListeners() {
@@ -169,102 +105,116 @@ function initOverlayListeners() {
     });
 }
 
-function renderVR() {
-    if (window.app.renderer) {
-        if (vrControls && !window.app.renderer.xr.isPresenting) {
-            vrControls.update();
-        }
-        if (vrScene && vrCamera) {
-            window.app.renderer.render(vrScene, vrCamera);
-        }
-    }
-}
-
 export async function startVRMode() {
-    if (isActive) return;
-    if (!window.app || !window.app.renderer) {
-        alert("Fehler: Renderer noch nicht bereit.");
-        return;
-    }
-    
-    // UI Blockieren & Loader zeigen
-    showVRLoader(true, 'VR/360° Modus wird initialisiert...');
-    
-    // Gyroskop Berechtigung (iOS) mit Promise-Timeout zur Vermeidung von Deadlocks
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+    try {
+        if (isActive) return;
+        
+        // 1. Sichere Engine-Initialisierung (Falls Nutzer direkt im Lab klickt)
+        if (!window.app || !window.app.renderer || !window.app.mainScene) {
+            if (window.app && typeof window.app.initEngine === 'function') {
+                showVRLoader(true, 'Starte 3D Engine im Hintergrund...');
+                window.app.initEngine();
+                // Kurz warten, bis der Raum geladen ist
+                await new Promise(resolve => setTimeout(resolve, 1500)); 
+            } else {
+                alert("Fehler: Engine nicht bereit.");
+                return;
+            }
+        }
+        
+        showVRLoader(true, 'VR/360° Modus wird initialisiert...');
+        
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+            try {
+                await Promise.race([
+                    DeviceOrientationEvent.requestPermission(),
+                    new Promise(resolve => setTimeout(() => resolve('timeout'), 1500))
+                ]);
+            } catch (error) {
+                console.warn('Gyroskop-Fehler:', error);
+            }
+        }
+
+        enterFullscreenAndLandscape().catch(e => console.warn(e));
+
+        const renderer = window.app.renderer;
+        const camera = window.app.mainCamera;
+        
+        renderer.xr.enabled = true;
+        
+        // 2. Kamera- & Steuerungszustand für das Beenden sichern
+        savedCameraState.pos.copy(camera.position);
+        if (window.app.mainControls) {
+            savedCameraState.target.copy(window.app.mainControls.target);
+            window.app.mainControls.enabled = false; // Planer-Steuerung sperren
+        }
+
+        // 3. Perspektive exakt auf den Avatar setzen (oder Raummitte als Fallback)
+        let startPos = new THREE.Vector3(0, 1.62, 0);
+        window.app.mainScene.traverse((child) => {
+            if (child.userData && child.userData.isAvatar) {
+                startPos.copy(child.position);
+                startPos.y += 1.62; // Exakte Visier-Höhe deines Avatars
+            }
+        });
+        camera.position.copy(startPos);
+
+        // 4. Gyroskop aktivieren
         try {
-            const permission = await Promise.race([
-                DeviceOrientationEvent.requestPermission(),
-                new Promise(resolve => setTimeout(() => resolve('timeout'), 1500))
-            ]);
-            if (permission !== 'granted' && permission !== 'timeout') console.warn('Gyroskop-Berechtigung verweigert.');
-        } catch (error) {
-            console.error('Fehler bei der Gyroskop-Berechtigung:', error);
+            vrControls = new DeviceOrientationControls(camera);
+        } catch(e) {
+            console.warn("DeviceOrientationControls Fehler (Fallback auf statische Kamera):", e);
+            vrControls = null;
         }
+
+        // 5. UI umschalten
+        toggleMainUI(false);
+        const overlay = document.getElementById('vr-overlay');
+        if (overlay) overlay.style.display = 'block';
+
+        initOverlayListeners();
+
+        // 6. Eigener Render-Loop auf Basis der HAUPT-Szene!
+        const renderVR = () => {
+            if (vrControls && !renderer.xr.isPresenting) {
+                vrControls.update();
+            }
+            renderer.render(window.app.mainScene, camera);
+        };
+
+        renderer.setAnimationLoop(renderVR);
+        isActive = true;
+        
+        // 7. WebXR Button Injection
+        try {
+            const oldBtn = document.getElementById('webxr-btn');
+            if(oldBtn) oldBtn.remove();
+
+            const vrBtn = VRButton.createButton(renderer);
+            vrBtn.id = 'webxr-btn';
+            vrBtn.style.position = 'absolute';
+            vrBtn.style.bottom = '80px';
+            vrBtn.style.left = '50%';
+            vrBtn.style.transform = 'translateX(-50%)';
+            vrBtn.style.pointerEvents = 'auto'; 
+            vrBtn.style.zIndex = '999999';
+            if (overlay) overlay.appendChild(vrBtn);
+
+            // Verstecke den Button, falls das Gerät (Desktop) kein Headset hat
+            setTimeout(() => {
+                const btn = document.getElementById('webxr-btn');
+                if (btn && (btn.disabled || btn.innerText.toLowerCase().includes('supported'))) {
+                    btn.style.display = 'none';
+                }
+            }, 3000);
+        } catch(e) { console.error("VRButton Error:", e); }
+
+        showVRLoader(false);
+
+    } catch(globalError) {
+        console.error("Kritischer Fehler beim Starten des VR-Modus:", globalError);
+        showVRLoader(false);
     }
-
-    // Fullscreen nicht blockierend
-    enterFullscreenAndLandscape().catch(e => console.warn(e));
-
-    const renderer = window.app.renderer;
-    
-    // WICHTIG: WebXR muss am Renderer zwingend aktiviert werden!
-    renderer.xr.enabled = true;
-    
-    // VR-Szene aufbauen
-    vrScene = new THREE.Scene();
-    vrScene.background = new THREE.Color(0x111827);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    vrScene.add(ambientLight);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    dirLight.position.set(5, 10, 7);
-    vrScene.add(dirLight);
-
-    vrCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-    vrCamera.position.set(0, 1.62, 0); 
-
-    vrControls = new DeviceOrientationControls(vrCamera);
-
-    // Modelle asynchron laden ABER Minimum-Ladezeit erzwingen, damit kein Glitch entsteht
-    showVRLoader(true, 'Lade 3D-Modelle für das SensAble Lab...');
-    await Promise.all([
-        loadVRRoom(),
-        new Promise(resolve => setTimeout(resolve, 800)) // Zwinge den Loader mind. 800ms zu bleiben
-    ]);
-
-    // Alles bereit -> UI wechseln und Render-Loop umschalten
-    toggleMainUI(false);
-    document.getElementById('vr-overlay').style.display = 'block';
-    
-    const startBtn = document.getElementById('main-vr-trigger');
-    if (startBtn) startBtn.style.display = 'none';
-
-    initOverlayListeners();
-
-    renderer.setAnimationLoop(renderVR);
-    isActive = true;
-    
-    // WebXR Button für Headsets anfügen
-    const vrBtn = VRButton.createButton(renderer);
-    vrBtn.id = 'webxr-btn';
-    vrBtn.style.position = 'absolute';
-    vrBtn.style.bottom = '80px';
-    vrBtn.style.left = '50%';
-    vrBtn.style.transform = 'translateX(-50%)';
-    vrBtn.style.pointerEvents = 'auto'; 
-    document.getElementById('vr-overlay').appendChild(vrBtn);
-
-    // NEU: Bugfix für hängende Browser-WebXR-APIs (verhindert ewiges "LOADING")
-    setTimeout(() => {
-        if (vrBtn && vrBtn.innerText.includes('LOADING')) {
-            vrBtn.style.display = 'none'; // Verstecken!
-            console.warn('WebXR API blockiert. Fallback auf reinen 360-Gyroskop-Modus.');
-        }
-    }, 2500);
-
-    // Loader ausblenden
-    showVRLoader(false);
 }
 
 export function stopVRMode() {
@@ -275,44 +225,43 @@ export function stopVRMode() {
     if (vrBtn) vrBtn.remove();
 
     const renderer = window.app.renderer;
-    renderer.setAnimationLoop(window.app.mainAnimate);
+    const camera = window.app.mainCamera;
 
-    vrScene.traverse((child) => {
-        if (child.isMesh) {
-            if (child.geometry) child.geometry.dispose();
-            if (child.material) {
-                if (Array.isArray(child.material)) child.material.forEach(m => m.dispose());
-                else child.material.dispose();
-            }
-        }
-    });
+    // Loop zurück an den Haupt-Planer übergeben
+    renderer.setAnimationLoop(window.app.mainAnimate);
     
-    vrControls.dispose();
-    vrScene = null;
-    vrCamera = null;
-    vrControls = null;
+    if (vrControls) {
+        vrControls.dispose();
+        vrControls = null;
+    }
+
+    // Kamera & Controls wiederherstellen
+    camera.position.copy(savedCameraState.pos);
+    if (window.app.mainControls) {
+        window.app.mainControls.target.copy(savedCameraState.target);
+        window.app.mainControls.enabled = true;
+        window.app.mainControls.update();
+    }
 
     if (document.fullscreenElement) document.exitFullscreen().catch(()=>{});
     else if (document.webkitFullscreenElement) document.webkitExitFullscreen().catch(()=>{});
-    
-    if (screen.orientation && screen.orientation.unlock) {
-        screen.orientation.unlock();
-    }
+    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
 
-    document.getElementById('vr-overlay').style.display = 'none';
-    const startBtn = document.getElementById('main-vr-trigger');
-    if (startBtn) startBtn.style.display = 'block';
+    const overlay = document.getElementById('vr-overlay');
+    if (overlay) overlay.style.display = 'none';
     
+    // VR CSS Filter zurücksetzen
     document.body.className = document.body.className.replace(/sim-[^\s]+/g, '').trim();
     
+    // UI wiederherstellen (Homescreen)
     toggleMainUI(true);
     window.dispatchEvent(new Event('resize'));
 }
 
 window.addEventListener('resize', () => {
-    if (isActive && vrCamera && window.app.renderer) {
-        vrCamera.aspect = window.innerWidth / window.innerHeight;
-        vrCamera.updateProjectionMatrix();
+    if (isActive && window.app.mainCamera && window.app.renderer) {
+        window.app.mainCamera.aspect = window.innerWidth / window.innerHeight;
+        window.app.mainCamera.updateProjectionMatrix();
         window.app.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 });

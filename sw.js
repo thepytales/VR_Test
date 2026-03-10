@@ -1,4 +1,4 @@
-const CACHE_NAME = 'elmeks-cache-v45'; 
+const CACHE_NAME = 'elmeks-cache-v55'; 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -27,7 +27,6 @@ const ASSETS_TO_CACHE = [
   './lib/draco/draco_decoder.wasm',
   './lib/draco/draco_wasm_wrapper.js'
 ];
-// Videodateien werden derzeit nich gecached
 
 // 1. Installieren: Fehlertolerantes Caching jeder einzelnen Datei
 self.addEventListener('install', (event) => {
@@ -68,8 +67,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
-  // NEU: Video-Dateien und Range-Requests (für Streaming) vom SW ignorieren
-  if (event.request.headers.has('range') || event.request.url.match(/\.(webm|mp4|ogg)$/i)) {
+  // NEU: Video-Dateien, Range-Requests und externe CDNs vom SW ignorieren
+  if (event.request.headers.has('range') || event.request.url.match(/\.(webm|mp4|ogg)$/i) || event.request.url.includes('unpkg.com')) {
     return;
   }
 

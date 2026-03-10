@@ -96,8 +96,8 @@
           "OBJLoader": "./lib/three/OBJLoader.js",
           "DRACOLoader": "./lib/three/DRACOLoader.js",
           "stats": "https://unpkg.com/three@0.160.0/examples/jsm/libs/stats.module.js",
-          "VRButton": "https://unpkg.com/three@0.160.0/examples/jsm/webxr/VRButton.js",
-          "DeviceOrientationControls": "https://unpkg.com/three@0.160.0/examples/jsm/controls/DeviceOrientationControls.js"
+          "VRButton": "./lib/three/VRButton.js",
+          "DeviceOrientationControls": "./lib/three/DeviceOrientationControlsESM.js"
         }
       }
     </script>
@@ -2048,7 +2048,7 @@
 
                     <div class="lab-card" style="margin: 0; display: flex; flex-direction: column;">
                         <div class="section-label" style="margin-bottom: 15px;">Virtuelle Realität</div>
-                        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 25px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 160px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(168, 85, 247, 0.08)'; this.style.borderColor='rgba(168, 85, 247, 0.3)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.05)'; this.style.transform='translateY(0)';" onclick="event.stopPropagation(); alert('WebXR Modus wird geladen...');">
+                        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 25px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 160px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(168, 85, 247, 0.08)'; this.style.borderColor='rgba(168, 85, 247, 0.3)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.05)'; this.style.transform='translateY(0)';" onclick="event.stopPropagation(); if(window.startVR) window.startVR(); else alert('VR Modus lädt noch...');">
                             <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);">
                                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M2 12h4l3-9 5 18 3-9h5"/></svg>
                             </div>

@@ -16,6 +16,7 @@ window.startVR = startVRMode;
 
 // === 1. Setup & Globale Variablen ===
 window.app = window.app || {}; 
+window.app.initEngine = init; // <-- NEU: Engine für VR Lab direkt aufrufbar machen
 // XSS-Schutz und UI-Methoden sind nach ui.js ausgelagert.
 
 const GLOBAL_SCALE = 0.6; 
@@ -609,22 +610,16 @@ function initTTS() {
 function startApp() {
     toggleLoader(true, "Lade Raum...");
     
-    // NEU: Exponiere die Kern-Variablen, damit das VR-Modul bei Beendigung die Main-Engine reaktivieren kann
+    // Exponiere die Kern-Variablen, damit das VR-Modul bei Beendigung die Main-Engine reaktivieren kann
     window.app.mainScene = scene;
     window.app.mainCamera = camera;
     window.app.mainAnimate = animate;
+    window.app.mainControls = controls;
     
-    // NEU: VR-Start-Button 100% copy-paste-sicher ins UI injizieren
-    if (!document.getElementById('main-vr-trigger')) {
-        const vrStartBtn = document.createElement('button');
-        vrStartBtn.id = 'main-vr-trigger';
-        vrStartBtn.innerHTML = '🥽 360° / VR Modus';
-        vrStartBtn.style.cssText = 'position: absolute; bottom: 20px; right: 20px; z-index: 9999; padding: 12px 24px; background: rgba(0,0,0,0.8); color: white; border: 2px solid #3b82f6; border-radius: 8px; font-weight: bold; font-family: "Inter", sans-serif; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3); backdrop-filter: blur(8px); transition: all 0.2s;';
-        vrStartBtn.onmouseover = () => { vrStartBtn.style.transform = 'scale(1.05)'; vrStartBtn.style.background = '#3b82f6'; };
-        vrStartBtn.onmouseout = () => { vrStartBtn.style.transform = 'scale(1)'; vrStartBtn.style.background = 'rgba(0,0,0,0.8)'; };
-        vrStartBtn.onclick = () => { if(window.startVR) window.startVR(); };
-        document.body.appendChild(vrStartBtn);
-    }
+    // HINWEIS: Der global injizierte Button wurde hier gelöscht, damit er nicht den Planer zerschießt.
+    // Der Aufruf erfolgt nun sauber über deinen eigenen Button in SensAble Labs.
+    const oldBtn = document.getElementById('main-vr-trigger');
+    if (oldBtn) oldBtn.remove();
     
     renderer.setAnimationLoop(animate);
     // Default Raum laden
