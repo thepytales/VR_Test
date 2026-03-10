@@ -1,9 +1,8 @@
 import * as THREE from "three";
-// Wir nutzen direkte URLs, um Import-Map Fehler auszuschließen
-import { VRButton } from "https://unpkg.com/three@0.160.0/examples/jsm/webxr/VRButton.js";
-import { DeviceOrientationControls } from "https://unpkg.com/three@0.160.0/examples/jsm/controls/DeviceOrientationControls.js";
-import { GLTFLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/DRACOLoader.js";
+import { VRButton } from "VRButton";
+import { DeviceOrientationControls } from "DeviceOrientationControls";
+import { GLTFLoader } from "GLTFLoader";
+import { DRACOLoader } from "DRACOLoader";
 
 let vrScene = null;
 let vrCamera = null;
@@ -96,7 +95,6 @@ async function enterFullscreenAndLandscape() {
     }
 }
 
-// NEU: Asynchrones Laden mit Promise, damit wir warten können!
 async function loadVRRoom() {
     return new Promise((resolve) => {
         const dracoLoader = new DRACOLoader();
@@ -110,21 +108,26 @@ async function loadVRRoom() {
         const checkDone = () => {
             loadedCount++;
             if (loadedCount >= totalItems) {
-                setTimeout(resolve, 300); // Kleiner Puffer für Textur-Upload an die GPU
+                setTimeout(resolve, 300);
             }
         };
 
         const loadModel = (filename, x, y, z, rot) => {
-            gltfLoader.load(`./${filename}`, (gltf) => {
-                const model = gltf.scene;
-                model.position.set(x, y, z);
-                model.rotation.y = rot;
-                vrScene.add(model);
+            try {
+                gltfLoader.load(`./${filename}`, (gltf) => {
+                    const model = gltf.scene;
+                    model.position.set(x, y, z);
+                    model.rotation.y = rot;
+                    vrScene.add(model);
+                    checkDone();
+                }, undefined, (error) => {
+                    console.error(`Fehler beim Laden von ${filename}:`, error);
+                    checkDone(); 
+                });
+            } catch (err) {
+                console.error(`Kritischer Fehler beim Starten des Ladevorgangs für ${filename}:`, err);
                 checkDone();
-            }, undefined, (error) => {
-                console.error(`Fehler beim Laden von ${filename}:`, error);
-                checkDone(); // Wir machen weiter, damit die App bei einem Fehler nicht ewig lädt
-            });
+            }
         };
 
         // Raum laden
@@ -167,9 +170,13 @@ function initOverlayListeners() {
 }
 
 function renderVR() {
-    if (vrControls) vrControls.update();
-    if (window.app.renderer && vrScene && vrCamera) {
-        window.app.renderer.render(vrScene, vrCamera);
+    if (window.app.renderer) {
+        if (vrControls && !window.app.renderer.xr.isPresenting) {
+            vrControls.update();
+        }
+        if (vrScene && vrCamera) {
+            window.app.renderer.render(vrScene, vrCamera);
+        }
     }
 }
 
@@ -183,11 +190,14 @@ export async function startVRMode() {
     // UI Blockieren & Loader zeigen
     showVRLoader(true, 'VR/360° Modus wird initialisiert...');
     
-    // Gyroskop Berechtigung (iOS)
+    // Gyroskop Berechtigung (iOS) mit Promise-Timeout zur Vermeidung von Deadlocks
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
         try {
-            const permission = await DeviceOrientationEvent.requestPermission();
-            if (permission !== 'granted') console.warn('Gyroskop-Berechtigung verweigert.');
+            const permission = await Promise.race([
+                DeviceOrientationEvent.requestPermission(),
+                new Promise(resolve => setTimeout(() => resolve('timeout'), 1500))
+            ]);
+            if (permission !== 'granted' && permission !== 'timeout') console.warn('Gyroskop-Berechtigung verweigert.');
         } catch (error) {
             console.error('Fehler bei der Gyroskop-Berechtigung:', error);
         }
@@ -197,6 +207,9 @@ export async function startVRMode() {
     enterFullscreenAndLandscape().catch(e => console.warn(e));
 
     const renderer = window.app.renderer;
+    
+    // WICHTIG: WebXR muss am Renderer zwingend aktiviert werden!
+    renderer.xr.enabled = true;
     
     // VR-Szene aufbauen
     vrScene = new THREE.Scene();

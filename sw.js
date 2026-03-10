@@ -1,4 +1,4 @@
-const CACHE_NAME = 'elmeks-cache-v43'; 
+const CACHE_NAME = 'elmeks-cache-v45'; 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -27,6 +27,7 @@ const ASSETS_TO_CACHE = [
   './lib/draco/draco_decoder.wasm',
   './lib/draco/draco_wasm_wrapper.js'
 ];
+// Videodateien werden derzeit nich gecached
 
 // 1. Installieren: Fehlertolerantes Caching jeder einzelnen Datei
 self.addEventListener('install', (event) => {
