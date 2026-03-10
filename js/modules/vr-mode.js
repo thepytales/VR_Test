@@ -155,15 +155,40 @@ function injectVRButtonStyle() {
             padding: 16px 28px !important;
             font-family: 'Inter', sans-serif !important;
             font-weight: 800 !important;
-            font-size: 14px !important;
+            font-size: 16px !important;
             box-shadow: 0 10px 25px rgba(59,130,246,0.6) !important;
             text-transform: uppercase !important;
-            letter-spacing: 1.5px !important;
+            letter-spacing: 2px !important;
             transition: transform 0.2s !important;
+            bottom: 140px !important; /* FIX: Weiter nach oben verschoben, klebt nicht mehr */
         }
         #webxr-btn:hover { transform: translateX(-50%) scale(1.05) !important; }
     `;
     document.head.appendChild(style);
+}
+
+// NEU: Injiziert fehlende UI-Buttons in dein VR-Menü
+function injectMissingFilterButtons() {
+    const firstBtn = document.querySelector('.vr-filter-btn');
+    if (!firstBtn) return;
+    const container = firstBtn.parentElement;
+    
+    const existingFilters = Array.from(container.children).map(b => b.getAttribute('data-filter'));
+    
+    const addBtn = (filter, text) => {
+        if (!existingFilters.includes(filter)) {
+            const btn = document.createElement('button');
+            btn.className = 'vr-filter-btn';
+            btn.setAttribute('data-filter', filter);
+            btn.innerText = text;
+            btn.style.cssText = 'background: rgba(255,255,255,0.1); color: #d1d5db; border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 6px; cursor: pointer; margin: 4px; font-family: "Inter", sans-serif; transition: all 0.2s;';
+            container.appendChild(btn);
+        }
+    };
+
+    addBtn('sim-cataract', 'Grauer Star');
+    addBtn('sim-glaucoma', 'Grüner Star');
+    addBtn('sim-blind', 'Blindheit');
 }
 
 export async function startVRMode() {
@@ -183,27 +208,29 @@ export async function startVRMode() {
         }
 
         // AUTO-FILL LOGIK: Wenn der Raum fast leer ist, spawnen wir ein Basis-Setup!
-        // Wir suchen die Möbel via ASSETS aus script.js
-        if (window.app.movableObjects && window.app.movableObjects.length < 2 && window.app.addFurniture) {
+        let furnitureCount = 0;
+        window.app.mainScene.traverse(c => {
+            if (c.userData && c.userData.typeId && !c.userData.isZone && !c.userData.isAvatar && !c.userData.isWallItem) {
+                furnitureCount++;
+            }
+        });
+
+        if (furnitureCount < 2 && window.app.addFurniture) {
             showVRLoader(true, 'Baue SensAble Lab auf...');
             try {
-                // Wir nutzen die Funktionen deiner script.js, um Tische sauber zu setzen
+                // Möbel spawnen und über die Scene-Hierarchie referenzieren (100% Fail-Safe)
                 await window.app.addFurniture('k6');
-                if (window.app.movableObjects.length > 0) {
-                    const t1 = window.app.movableObjects[window.app.movableObjects.length - 1];
-                    t1.position.set(-1.94, 0.22, -1.59);
-                }
+                let t1 = window.app.mainScene.children[window.app.mainScene.children.length - 1];
+                if (t1) t1.position.set(-1.94, 0.22, -1.59);
+
                 await window.app.addFurniture('k6');
-                if (window.app.movableObjects.length > 0) {
-                    const t2 = window.app.movableObjects[window.app.movableObjects.length - 1];
-                    t2.position.set(2.06, 0.22, -1.31);
-                    t2.rotation.y = 0.78;
-                }
+                let t2 = window.app.mainScene.children[window.app.mainScene.children.length - 1];
+                if (t2) { t2.position.set(2.06, 0.22, -1.31); t2.rotation.y = 0.78; }
+
                 await window.app.addFurniture('board');
-                if (window.app.movableObjects.length > 0) {
-                    const board = window.app.movableObjects[window.app.movableObjects.length - 1];
-                    board.position.set(0, 0.22, -3.85);
-                }
+                let board = window.app.mainScene.children[window.app.mainScene.children.length - 1];
+                if (board) board.position.set(0, 0.22, -3.85);
+                
             } catch(e) { console.warn("Auto-Setup fehlgeschlagen", e); }
         }
         
@@ -260,11 +287,12 @@ export async function startVRMode() {
             vrControls = null;
         }
 
-        // 6. UI aufräumen
+        // 6. UI aufräumen & Filter injizieren
         toggleMainUI(false);
         const overlay = document.getElementById('vr-overlay');
         if (overlay) overlay.style.display = 'block';
 
+        injectMissingFilterButtons(); // <-- NEU: Fügt die Buttons in dein UI ein!
         initOverlayListeners();
 
         // 7. Render-Loop starten
@@ -278,7 +306,7 @@ export async function startVRMode() {
         renderer.setAnimationLoop(renderVR);
         isActive = true;
         
-        // 8. Wunderschönen WebXR Button generieren
+        // 8. WebXR Button generieren
         injectVRButtonStyle();
         try {
             const oldBtn = document.getElementById('webxr-btn');
@@ -287,19 +315,18 @@ export async function startVRMode() {
             const vrBtn = VRButton.createButton(renderer);
             vrBtn.id = 'webxr-btn';
             vrBtn.style.position = 'absolute';
-            vrBtn.style.bottom = '80px';
             vrBtn.style.left = '50%';
             vrBtn.style.transform = 'translateX(-50%)';
             vrBtn.style.pointerEvents = 'auto'; 
             vrBtn.style.zIndex = '999999';
             if (overlay) overlay.appendChild(vrBtn);
 
-            // Text anpassen und verstecken, wenn Desktop ohne Headset
+            // Text exakt auf "VR" kürzen
             setTimeout(() => {
                 const btn = document.getElementById('webxr-btn');
                 if (btn) {
-                    if (btn.innerText.toLowerCase().includes('enter vr')) {
-                        btn.innerText = '🥽 VR-Brille / Cardboard';
+                    if (btn.innerText.toLowerCase().includes('enter vr') || btn.innerText.toLowerCase().includes('vr')) {
+                        btn.innerText = 'VR';
                     }
                     if (btn.disabled || btn.innerText.toLowerCase().includes('supported')) {
                         btn.style.display = 'none';
