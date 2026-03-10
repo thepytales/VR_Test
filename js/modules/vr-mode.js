@@ -1,8 +1,9 @@
 import * as THREE from "three";
-import { VRButton } from "VRButton";
-import { DeviceOrientationControls } from "DeviceOrientationControls";
-import { GLTFLoader } from "GLTFLoader";
-import { DRACOLoader } from "DRACOLoader";
+// Wir nutzen direkte URLs, um Import-Map Fehler auszuschließen
+import { VRButton } from "https://unpkg.com/three@0.160.0/examples/jsm/webxr/VRButton.js";
+import { DeviceOrientationControls } from "https://unpkg.com/three@0.160.0/examples/jsm/controls/DeviceOrientationControls.js";
+import { GLTFLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/DRACOLoader.js";
 
 let vrScene = null;
 let vrCamera = null;
@@ -174,6 +175,10 @@ function renderVR() {
 
 export async function startVRMode() {
     if (isActive) return;
+    if (!window.app || !window.app.renderer) {
+        alert("Fehler: Renderer noch nicht bereit.");
+        return;
+    }
     
     // UI Blockieren & Loader zeigen
     showVRLoader(true, 'VR/360° Modus wird initialisiert...');
