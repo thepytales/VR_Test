@@ -9,6 +9,10 @@ import Stats from "stats"; // <-- NEU HINZUGEFÜGT
 import { initRightSidebar } from "./js/modules/ui.js"; 
 import { toggleAvatar, toggleAvatarView, isFirstPersonActive } from "./js/modules/avatar.js";
 import { SCENARIOS, SIM_GLOSSARY, ASSETS } from "./js/modules/data.js";
+import { startVRMode } from "./js/modules/vr-mode.js"; // <-- NEU: VR Modul
+
+// Expose für das UI
+window.startVR = startVRMode;
 
 // === 1. Setup & Globale Variablen ===
 window.app = window.app || {}; 
@@ -326,6 +330,9 @@ function init() {
           preserveDrawingBuffer: true, 
           powerPreference: "high-performance"
       });
+      
+      // NEU: WebXR aktivieren für den VR/360°-Modus
+      renderer.xr.enabled = true;
 
       window.app.renderer = renderer;
       
@@ -520,6 +527,7 @@ function init() {
       // NEU: Einstellungen aus LocalStorage laden (beim Zurückkehren aus Modulen)
       const savedHC = localStorage.getItem('elmeks_high_contrast') === 'true';
       const savedRA = localStorage.getItem('elmeks_read_aloud') === 'true';
+      const savedFPS = localStorage.getItem('elmeks_show_fps') === 'true'; // <--- NEU
       
       const hcApp = document.getElementById('set-high-contrast');
       const hcHome = document.getElementById('start-high-contrast');
@@ -531,9 +539,20 @@ function init() {
       if (raApp) raApp.checked = savedRA;
       if (raHome) raHome.checked = savedRA;
 
+      // --- NEU: FPS SYNC START ---
+      const fpsApp = document.getElementById('set-performance');
+      const fpsHome = document.getElementById('start-performance');
+      if (fpsApp) fpsApp.checked = savedFPS;
+      if (fpsHome) fpsHome.checked = savedFPS;
+      settings.showFPS = savedFPS;
+      
+      const fpsBox = document.getElementById('fps-container');
+      if (fpsBox) fpsBox.style.display = savedFPS ? 'block' : 'none';
+      // --- NEU: FPS SYNC ENDE ---
+
       // Controls zu Beginn sichtbar schalten
       settings.controlsEnabled = true;
-      app.updateSettings(); 
+      app.updateSettings();
 
       // Vorlesemodus initialisieren
       initTTS();
@@ -589,7 +608,25 @@ function initTTS() {
 
 function startApp() {
     toggleLoader(true, "Lade Raum...");
-    animate();
+    
+    // NEU: Exponiere die Kern-Variablen, damit das VR-Modul bei Beendigung die Main-Engine reaktivieren kann
+    window.app.mainScene = scene;
+    window.app.mainCamera = camera;
+    window.app.mainAnimate = animate;
+    
+    // NEU: VR-Start-Button 100% copy-paste-sicher ins UI injizieren
+    if (!document.getElementById('main-vr-trigger')) {
+        const vrStartBtn = document.createElement('button');
+        vrStartBtn.id = 'main-vr-trigger';
+        vrStartBtn.innerHTML = '🥽 360° / VR Modus';
+        vrStartBtn.style.cssText = 'position: absolute; bottom: 20px; right: 20px; z-index: 9999; padding: 12px 24px; background: rgba(0,0,0,0.8); color: white; border: 2px solid #3b82f6; border-radius: 8px; font-weight: bold; font-family: "Inter", sans-serif; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3); backdrop-filter: blur(8px); transition: all 0.2s;';
+        vrStartBtn.onmouseover = () => { vrStartBtn.style.transform = 'scale(1.05)'; vrStartBtn.style.background = '#3b82f6'; };
+        vrStartBtn.onmouseout = () => { vrStartBtn.style.transform = 'scale(1)'; vrStartBtn.style.background = 'rgba(0,0,0,0.8)'; };
+        vrStartBtn.onclick = () => { if(window.startVR) window.startVR(); };
+        document.body.appendChild(vrStartBtn);
+    }
+    
+    renderer.setAnimationLoop(animate);
     // Default Raum laden
     loadRoomAsset("raummodell_leer.glb")
         .then((model) => {
@@ -1129,7 +1166,7 @@ function processMovement() {
 }
 
 function animate() { 
-    requestAnimationFrame(animate); 
+    // requestAnimationFrame wurde durch renderer.setAnimationLoop() ersetzt
     
     // Live Update für Vision Cone (Draufsicht)
     if(isVisionAnalysisMode) {
@@ -1147,7 +1184,7 @@ function animate() {
     processMovement();
     
     // Controls Update IMMER ausführen (für Maus-Rotation auch in FP)
-    controls.update(); 
+    if (controls) controls.update(); 
     
     renderer.render(scene, camera); 
     
@@ -1245,6 +1282,9 @@ window.app.updateSettings = function() {
     // NEU: In LocalStorage speichern, damit die Practice-Module darauf zugreifen können
     localStorage.setItem('elmeks_high_contrast', highContrast);
     localStorage.setItem('elmeks_read_aloud', settings.readAloud);
+    
+    // FIX: Vorlesemodus-Status synchron zur ui.js halten, damit er sich nicht von selbst wieder aktiviert!
+    window.app.readAloudActive = settings.readAloud;
     
     // Checkbox-Werte auslesen (nur wenn sie im HTML existieren)
     const fpsApp = document.getElementById('set-performance');

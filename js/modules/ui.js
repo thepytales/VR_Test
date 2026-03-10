@@ -2,10 +2,68 @@ import { SCENARIOS, ASSETS } from "./data.js";
 
 window.app = window.app || {};
 
+// === UI FALLBACKS FÜR LAZY LOADING ===
+// Behebt den Bug: Einstellungen im Home-Menü gehen nicht vor dem Start der Engine
+if (!window.app.updateSettings) {
+    window.app.updateSettings = function() {
+        // High Contrast Sync
+        const hcHome = document.getElementById('start-high-contrast');
+        const hcPlan = document.getElementById('set-high-contrast');
+        let isHC = document.body.classList.contains('high-contrast');
+        
+        if (hcHome && hcHome.checked !== isHC) isHC = hcHome.checked;
+        else if (hcPlan && hcPlan.checked !== isHC) isHC = hcPlan.checked;
+        
+        if (isHC) document.body.classList.add('high-contrast');
+        else document.body.classList.remove('high-contrast');
+        
+        if (hcHome) hcHome.checked = isHC;
+        if (hcPlan) hcPlan.checked = isHC;
+
+        // Vorlese-Modus Sync
+        const raHome = document.getElementById('start-read-aloud');
+        const raPlan = document.getElementById('set-read-aloud');
+        let isRA = window.app.readAloudActive || false;
+        
+        if (raHome && raHome.checked !== isRA) isRA = raHome.checked;
+        else if (raPlan && raPlan.checked !== isRA) isRA = raPlan.checked;
+        
+        window.app.readAloudActive = isRA;
+        if (raHome) raHome.checked = isRA;
+        if (raPlan) raPlan.checked = isRA;
+
+        // Performance Sync
+        const perfHome = document.getElementById('start-performance');
+        const perfPlan = document.getElementById('set-performance');
+        let isPerf = window.app.performanceActive || false;
+        
+        if (perfHome && perfHome.checked !== isPerf) isPerf = perfHome.checked;
+        else if (perfPlan && perfPlan.checked !== isPerf) isPerf = perfPlan.checked;
+        
+        window.app.performanceActive = isPerf;
+        if (perfHome) perfHome.checked = isPerf;
+        if (perfPlan) perfPlan.checked = isPerf;
+    };
+}
+
+if (!window.app.toggleFullscreen) {
+    window.app.toggleFullscreen = function() {
+        const fsHome = document.getElementById('start-fullscreen');
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => console.log("Fullscreen Error:", err));
+            if (fsHome) fsHome.checked = true;
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+            if (fsHome) fsHome.checked = false;
+        }
+    };
+}
+
 // Dummy Exports (damit bestehende Imports in script.js nicht brechen)
 export function initRightSidebar() {
     // Wird von script.js aufgerufen
 }
+
 export function updateAnalysisUI() {
     // Wird von script.js aufgerufen
 }
@@ -195,6 +253,17 @@ window.app.startScenarioEditor = async function() {
     if(notif) { notif.innerText = "Szenario-Editor gestartet"; notif.classList.add("visible"); setTimeout(() => notif.classList.remove("visible"), 3000); }
 };
 
+window.app.startLab = async function() {
+    try {
+        await import('./audio-sim.js');
+        if (window.app.initAudioSim) {
+            window.app.initAudioSim();
+        }
+    } catch(e) {
+        console.error("Fehler beim asynchronen Laden der Audio-Engine:", e);
+    }
+};
+
 window.app.startSession = window.app.startStandardPlanner;
 
 window.app.confirmGoHome = function() {
@@ -209,6 +278,7 @@ window.app.confirmGoHome = function() {
             <div style="display:flex; gap:10px; flex-direction:column; margin-top:20px;">
                 <button class="primary" onclick="${window.app.currentMode === 'editor' ? 'alert(\'Export folgt\');' : 'if(window.app.savePlan) window.app.savePlan(); setTimeout(app.goHome, 500);'}">Speichern & Beenden</button>
                 <button class="danger" onclick="app.goHome()">Ohne Speichern beenden</button>
+                <button style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#d1d5db; padding:8px 14px; border-radius:8px; cursor:pointer;" onclick="document.getElementById('modal-overlay').classList.remove('active')">Abbrechen</button>
             </div>
         `;
         modalOverlay.classList.add('active');
@@ -241,13 +311,103 @@ window.app.toggleSettings = function() {
     if(el) el.classList.toggle('active');
 };
 
+window.app.updateSettings = function() {
+    // 1. Hochkontrast
+    const hcHome = document.getElementById('start-high-contrast');
+    const hcPlan = document.getElementById('set-high-contrast');
+    let hcState = document.body.classList.contains('high-contrast');
+    
+    if (hcHome && hcHome.checked !== hcState) hcState = hcHome.checked;
+    else if (hcPlan && hcPlan.checked !== hcState) hcState = hcPlan.checked;
+    
+    if (hcState) document.body.classList.add('high-contrast');
+    else document.body.classList.remove('high-contrast');
+    
+    if (hcHome) hcHome.checked = hcState;
+    if (hcPlan) hcPlan.checked = hcState;
+
+    // 2. Vorlesemodus
+    const raHome = document.getElementById('start-read-aloud');
+    const raPlan = document.getElementById('set-read-aloud');
+    let raState = window.app.readAloudActive || false;
+    
+    let raChanged = false;
+    if (raHome && raHome.checked !== raState) { raState = raHome.checked; raChanged = true; }
+    else if (raPlan && raPlan.checked !== raState) { raState = raPlan.checked; raChanged = true; }
+    
+    window.app.readAloudActive = raState;
+    if (raHome) raHome.checked = raState;
+    if (raPlan) raPlan.checked = raState;
+
+    // Audio-Feedback & Browser-Unlock für die Sprachausgabe
+    if (raChanged && raState && window.app.speakText) {
+        window.app.speakText("Vorlesemodus aktiviert");
+    }
+
+    // 3. Performance Details
+    const perfHome = document.getElementById('start-performance');
+    const perfPlan = document.getElementById('set-performance');
+    let perfState = window.app.performanceActive || false;
+    
+    let perfChanged = false;
+    if (perfHome && perfHome.checked !== perfState) { perfState = perfHome.checked; perfChanged = true; }
+    else if (perfPlan && perfPlan.checked !== perfState) { perfState = perfPlan.checked; perfChanged = true; }
+    
+    window.app.performanceActive = perfState;
+    if (perfHome) perfHome.checked = perfState;
+    if (perfPlan) perfPlan.checked = perfState;
+
+    // Visuelles Feedback für Performance-Anzeige auf dem Homescreen
+    if (perfChanged && perfState && !window.app.engineLoaded) {
+        const notif = document.getElementById("notification");
+        if (notif) {
+            notif.innerText = "Performance-Anzeige startet mit dem Planer.";
+            notif.classList.add("visible");
+            setTimeout(() => notif.classList.remove("visible"), 3500);
+        }
+    }
+};
+
+window.app.toggleFullscreen = window.app.toggleFullscreen || function() {
+    const fsHome = document.getElementById('start-fullscreen');
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.error(err));
+        if (fsHome) fsHome.checked = true;
+    } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        if (fsHome) fsHome.checked = false;
+    }
+};
+
+// Globaler Hover-Listener für den Vorlesemodus
+document.addEventListener('mouseover', function(e) {
+    if (window.app && window.app.readAloudActive) {
+        const target = e.target.closest('button, a, label, select, .module-card, .feature-item, .home-tab-btn');
+        if (target) {
+            let textToRead = target.getAttribute('aria-label') || target.title || target.innerText;
+            if (textToRead) {
+                textToRead = textToRead.trim();
+                if (textToRead !== '' && window.app.speakText && window.app.lastSpoken !== textToRead) {
+                    window.app.speakText(textToRead);
+                    window.app.lastSpoken = textToRead;
+                    setTimeout(() => { window.app.lastSpoken = null; }, 1500);
+                }
+            }
+        }
+    }
+});
+
 let currentFontScale = 1.0;
+
 window.app.setFontScale = function(delta) {
     currentFontScale = Math.round((currentFontScale + delta) * 10) / 10;
     currentFontScale = Math.max(0.8, Math.min(1.5, currentFontScale));
     
     const valEl = document.getElementById('font-scale-val');
     if(valEl) valEl.innerText = Math.round(currentFontScale * 100) + "%";
+    
+    const valElHome = document.getElementById('font-scale-val-home');
+    if(valElHome) valElHome.innerText = Math.round(currentFontScale * 100) + "%";
     
     const uiLayers = [
         'ui-layer', 'homescreen', 'modal-overlay', 'settings-overlay', 
@@ -566,3 +726,140 @@ window.app.confirmLoad = function(mode) {
     };
     reader.readAsText(file);
 };
+
+// === FALLBACKS FÜR DEN HOMESCREEN (LAZY LOADING FIX) ===
+window.app.updateSettings = window.app.updateSettings || function() {
+    // 1. Hochkontrast
+    const hcHome = document.getElementById('start-high-contrast');
+    const hcPlan = document.getElementById('set-high-contrast');
+    let isHC = document.body.classList.contains('high-contrast');
+    
+    if (hcHome && hcHome.checked !== isHC) {
+        isHC = hcHome.checked;
+    } else if (hcPlan && hcPlan.checked !== isHC) {
+        isHC = hcPlan.checked;
+    }
+    
+    if (isHC) document.body.classList.add('high-contrast');
+    else document.body.classList.remove('high-contrast');
+    
+    if (hcHome) hcHome.checked = isHC;
+    if (hcPlan) hcPlan.checked = isHC;
+
+    // 2. Vorlese-Modus
+    const raHome = document.getElementById('start-read-aloud');
+    const raPlan = document.getElementById('set-read-aloud');
+    let isRA = window.app.readAloudActive || false;
+    
+    if (raHome && raHome.checked !== isRA) {
+        isRA = raHome.checked;
+    } else if (raPlan && raPlan.checked !== isRA) {
+        isRA = raPlan.checked;
+    }
+    
+    window.app.readAloudActive = isRA;
+    if (raHome) raHome.checked = isRA;
+    if (raPlan) raPlan.checked = isRA;
+
+    // 3. Performance Details
+    const perfHome = document.getElementById('start-performance');
+    const perfPlan = document.getElementById('set-performance');
+    let isPerf = window.app.performanceActive || false;
+    
+    if (perfHome && perfHome.checked !== isPerf) {
+        isPerf = perfHome.checked;
+    } else if (perfPlan && perfPlan.checked !== isPerf) {
+        isPerf = perfPlan.checked;
+    }
+    
+    window.app.performanceActive = isPerf;
+    if (perfHome) perfHome.checked = isPerf;
+    if (perfPlan) perfPlan.checked = isPerf;
+};
+
+window.app.toggleFullscreen = window.app.toggleFullscreen || function() {
+    const fsHome = document.getElementById('start-fullscreen');
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.error("Fullscreen Error:", err));
+        if (fsHome) fsHome.checked = true;
+    } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        if (fsHome) fsHome.checked = false;
+    }
+};
+
+// --- FALLBACK FÜR DIE STARTSEITE & EINSTELLUNGEN (Lazy Loading Fix) ---
+
+window.app.toggleFullscreen = window.app.toggleFullscreen || function() {
+    const docEl = document.documentElement;
+    if (!document.fullscreenElement) {
+        if (docEl.requestFullscreen) docEl.requestFullscreen();
+        else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
+    } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+};
+
+// Wir ersetzen die fehleranfällige HTML-"onchange"-Logik durch saubere Event-Listener
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Lokalen Speicher auslesen (ist für neue Nutzer automatisch FALSE = aus)
+    const hc = localStorage.getItem('elmeks_high_contrast') === 'true';
+    const ra = localStorage.getItem('elmeks_read_aloud') === 'true'; 
+    const fps = localStorage.getItem('elmeks_show_fps') === 'true';
+
+    // Hilfsfunktion: Synchronisiert die Schalter auf der Startseite UND im 3D-Planer
+    const syncToggles = (selector, storageKey, initialState, callback) => {
+        const elements = document.querySelectorAll(selector);
+        
+        // Setzt den Zustand aus dem Speicher
+        elements.forEach(el => {
+            el.checked = initialState;
+            el.removeAttribute('onchange'); // Blockiert alte, fehlerhafte HTML-Aufrufe
+            
+            el.addEventListener('change', (e) => {
+                const isChecked = e.target.checked;
+                localStorage.setItem(storageKey, isChecked);
+                
+                // Wenn du einen Schalter klickst, wird der unsichtbare zweite Schalter mitbewegt!
+                elements.forEach(otherEl => otherEl.checked = isChecked);
+                if (callback) callback(isChecked, true);
+            });
+        });
+        
+        // Initial einmal ausführen
+        if (callback) callback(initialState, false);
+    };
+
+    // Kontrast synchronisieren
+    syncToggles('#start-high-contrast, #set-high-contrast', 'elmeks_high_contrast', hc, (state) => {
+        if (state) document.body.classList.add('high-contrast');
+        else document.body.classList.remove('high-contrast');
+    });
+
+    // Vorlesemodus synchronisieren (Das behebt den Fehler!)
+    syncToggles('#start-read-aloud, #set-read-aloud', 'elmeks_read_aloud', ra, (state) => {
+        window.app.readAloudActive = state;
+    });
+
+    // Performance synchronisieren (Das macht die Benachrichtigung zuverlässig!)
+    syncToggles('#start-performance, #set-performance', 'elmeks_show_fps', fps, (state, isUserClick) => {
+        const fpsBox = document.getElementById('fps-container');
+        if (fpsBox) fpsBox.style.display = state ? 'block' : 'none';
+        
+        // Pop-up Benachrichtigung (nur wenn der Nutzer aktiv geklickt hat)
+        if (isUserClick) {
+            const notif = document.getElementById("notification");
+            if (notif) {
+                notif.innerText = state 
+                    ? "Performance-Details aktiviert (Sichtbar im 3D-Modus)" 
+                    : "Performance-Details deaktiviert";
+                notif.classList.add("visible");
+                setTimeout(() => notif.classList.remove("visible"), 3000);
+            }
+        }
+    });
+});
+
+// Dummy-Funktion: Macht eventuelle alte Aufrufe in script.js unschädlich
+window.app.updateSettings = function() {};
