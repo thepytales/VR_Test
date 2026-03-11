@@ -43,22 +43,35 @@ function showVRLoader(show, text = 'Lade 3D-Assets...') {
 }
 
 function toggleMainUI(show) {
+    const uiLayer = document.getElementById('ui-layer');
+    const homeScreen = document.getElementById('homescreen');
     const overlay = document.getElementById('modal-overlay');
+    const scenarioLayer = document.getElementById('scenario-ui-layer');
     const topBar = document.querySelector('.top-bar');
     const leftSidebar = document.querySelector('.sidebar');
-    const vrMenu = document.querySelector('.vr-menu-container'); 
     
     if (show) {
+        if (window.app && typeof window.app.goHome === 'function') {
+            window.app.goHome(); 
+        } else if(homeScreen) {
+            homeScreen.style.display = 'flex';
+        }
         if(overlay) overlay.classList.remove('active');
         if(topBar) topBar.style.display = 'flex';
         if(leftSidebar) leftSidebar.style.display = 'flex';
         if (window.app && window.app.updateVisionEffects) window.app.updateVisionEffects();
     } else {
+        // ZWINGEND ERFORDERLICH: Homescreen ausblenden!
+        if(homeScreen) homeScreen.style.display = 'none';
+        if(scenarioLayer) scenarioLayer.style.display = 'none';
         if(overlay) overlay.classList.remove('active');
-        // WICHTIG: Die RECHTE Sidebar mit den Reglern bleibt aktiv! Wir blenden nur Links und Oben aus.
+        
+        // ZWINGEND ERFORDERLICH: Planer-UI einblenden, damit die rechte Leiste existiert!
+        if(uiLayer) uiLayer.style.display = 'flex';
+        
+        // Links und Oben ausblenden, RECHTS bleibt
         if(topBar) topBar.style.display = 'none';
         if(leftSidebar) leftSidebar.style.display = 'none';
-        if(vrMenu) vrMenu.style.display = 'none'; // Altes statisches VR Menü weg
     }
 }
 
@@ -297,6 +310,13 @@ export async function startVRMode() {
         toggleMainUI(false);
         const overlay = document.getElementById('vr-overlay');
         if (overlay) overlay.style.display = 'block';
+
+        // ALTE BUTTONS ENTFERNEN: Die unteren Filter-Buttons werden restlos ausgeblendet,
+        // da wir jetzt exklusiv die komplette rechte Leiste nutzen!
+        const oldFilterBtns = document.querySelectorAll('.vr-filter-btn');
+        if(oldFilterBtns.length > 0 && oldFilterBtns[0].parentElement) {
+            oldFilterBtns[0].parentElement.style.display = 'none';
+        }
 
         initOverlayListeners();
         
