@@ -347,11 +347,18 @@ function init() {
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       document.body.appendChild(renderer.domElement);
 
-      const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.9);
+      // Basis-Beleuchtung (Himmel weiss-blau, Boden neutral-erdig)
+      const hemiLight = new THREE.HemisphereLight(0xebf4ff, 0x555555, 1.2);
       scene.add(hemiLight);
       
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      dirLight.position.set(5, 15, 5);
+      // Zusaetzliches fuellendes Licht, um harte pechschwarze Schatten zu vermeiden
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+      
+      // Haupt-Sonnenlicht (leicht warm)
+      const dirLight = new THREE.DirectionalLight(0xfffaed, 1.8);
+      // Schraegerer Winkel fuer schoenen Lichteinfall durch Fenster
+      dirLight.position.set(12, 10, 8);
       dirLight.castShadow = true;
       
       // PERFORMANCE 4: Schattenbereich strikt auf den Raum begrenzen und Map-Größe festlegen
