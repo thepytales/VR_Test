@@ -108,10 +108,16 @@ function applyVRShader(filterStr, severity) {
 // Baut das neue, freistehende Menue am unteren Bildschirmrand
 function buildVRMenu() {
     let container = document.getElementById('custom-vr-menu');
+    
+    // ZWINGEND: Das Hintergrund-Overlay darf Klicks nicht blockieren!
+    const overlay = document.getElementById('vr-overlay');
+    if (overlay) overlay.style.pointerEvents = 'none';
+
     if (!container) {
         container = document.createElement('div');
         container.id = 'custom-vr-menu';
-        container.style.cssText = 'position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 9999; background: rgba(17, 24, 39, 0.85); padding: 20px; border-radius: 16px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 600px;';
+        // ZWINGEND: Z-Index maximieren, pointer-events: auto fuer Klicks, touch-action gegen Webseiten-Zoom
+        container.style.cssText = 'position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 2147483647; background: rgba(17, 24, 39, 0.85); padding: 20px; border-radius: 16px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 600px; pointer-events: auto; touch-action: none;';
 
         // 1. Slider für Schweregrad
         const sliderRow = document.createElement('div');
@@ -205,7 +211,8 @@ function injectVRButtonStyle() {
             text-transform: uppercase !important;
             letter-spacing: 2px !important;
             transition: transform 0.2s !important;
-            bottom: 140px !important; /* FIX: Weiter nach oben verschoben, klebt nicht mehr */
+            top: 20px !important; 
+            bottom: auto !important; 
         }
         #webxr-btn:hover { transform: translateX(-50%) scale(1.05) !important; }
     `;
@@ -359,13 +366,24 @@ export async function startVRMode() {
             });
         }
 
-        // Kamera minimal noch tiefer (0.6)
+        // Kamera tief fixieren (0.6) und Avatar unsichtbar machen!
         let startPos = new THREE.Vector3(0, 0.6, 0); 
         if (avatarObj) {
+            if (avatarObj.userData && avatarObj.userData.visualRef) {
+                avatarObj.userData.visualRef.visible = false;
+            }
             startPos.copy(avatarObj.position);
             startPos.y += 0.6; 
         }
         camera.position.copy(startPos);
+
+        // STRIKTE KONTROLLE: Zoomen und Wischen komplett deaktivieren!
+        if (window.app.mainControls) {
+            window.app.mainControls.enabled = false;
+            window.app.mainControls.enableZoom = false;
+            window.app.mainControls.enablePan = false;
+            window.app.mainControls.enableRotate = false;
+        }
 
         // 5. Gyroskop aktivieren
         try {
@@ -459,11 +477,23 @@ export function stopVRMode() {
     }
     if (window.app.mainScene.fog) window.app.mainScene.fog.density = 0;
 
-    // Kamera & Controls wiederherstellen
+    // Avatar wieder sichtbar machen fuer den Planer
+    if (window.app.mainScene) {
+        window.app.mainScene.traverse((child) => {
+            if (child.userData && child.userData.isAvatar && child.userData.visualRef) {
+                child.userData.visualRef.visible = true;
+            }
+        });
+    }
+
+    // Kamera & Controls vollstaendig wiederherstellen
     camera.position.copy(savedCameraState.pos);
     if (window.app.mainControls) {
         window.app.mainControls.target.copy(savedCameraState.target);
         window.app.mainControls.enabled = true;
+        window.app.mainControls.enableZoom = true;
+        window.app.mainControls.enablePan = true;
+        window.app.mainControls.enableRotate = true;
         window.app.mainControls.update();
     }
 
@@ -472,7 +502,10 @@ export function stopVRMode() {
     if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
 
     const overlay = document.getElementById('vr-overlay');
-    if (overlay) overlay.style.display = 'none';
+    if (overlay) {
+        overlay.style.display = 'none';
+        overlay.style.pointerEvents = ''; 
+    }
     
     document.body.className = document.body.className.replace(/sim-[^\s]+/g, '').trim();
     
