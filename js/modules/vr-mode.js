@@ -46,32 +46,16 @@ function toggleMainUI(show) {
     const uiLayer = document.getElementById('ui-layer');
     const homeScreen = document.getElementById('homescreen');
     const overlay = document.getElementById('modal-overlay');
-    const scenarioLayer = document.getElementById('scenario-ui-layer');
-    const topBar = document.querySelector('.top-bar');
-    const leftSidebar = document.querySelector('.sidebar');
+    const oldLabMenu = document.querySelector('.vr-menu-container'); 
     
     if (show) {
-        if (window.app && typeof window.app.goHome === 'function') {
-            window.app.goHome(); 
-        } else if(homeScreen) {
-            homeScreen.style.display = 'flex';
-        }
-        if(overlay) overlay.classList.remove('active');
-        if(topBar) topBar.style.display = 'flex';
-        if(leftSidebar) leftSidebar.style.display = 'flex';
-        if (window.app && window.app.updateVisionEffects) window.app.updateVisionEffects();
+        if(homeScreen) homeScreen.style.display = 'flex';
     } else {
-        // ZWINGEND ERFORDERLICH: Homescreen ausblenden!
+        // ALLES verstecken außer unserem neuen VR Overlay!
+        if(uiLayer) uiLayer.style.display = 'none';
         if(homeScreen) homeScreen.style.display = 'none';
-        if(scenarioLayer) scenarioLayer.style.display = 'none';
         if(overlay) overlay.classList.remove('active');
-        
-        // ZWINGEND ERFORDERLICH: Planer-UI einblenden, damit die rechte Leiste existiert!
-        if(uiLayer) uiLayer.style.display = 'flex';
-        
-        // Links und Oben ausblenden, RECHTS bleibt
-        if(topBar) topBar.style.display = 'none';
-        if(leftSidebar) leftSidebar.style.display = 'none';
+        if(oldLabMenu) oldLabMenu.style.display = 'none'; 
     }
 }
 
@@ -84,41 +68,115 @@ async function enterFullscreenAndLandscape() {
     } catch (err) { console.warn("Fullscreen/Orientation restricted.", err); }
 }
 
-// Globale WebGL-Filter Logik (Wird von script.js direkt aus dem rechten UI angesteuert!)
-window.app.applyVRWebGLFilter = function(simMode, visus, severity) {
+// Exklusive Shader-Steuerung nur fuer VR
+function applyVRShader(filterStr, severity) {
     if (!vrFilterMesh || !vrFilterMesh.material.uniforms || !window.app.mainScene) return;
 
     // Reset Filter
     vrFilterMesh.material.uniforms.opacity.value = 0.0;
     vrFilterMesh.material.uniforms.mode.value = 0; 
-    vrFilterMesh.material.uniforms.severity.value = parseFloat(severity) || 2.0;
-    
+    vrFilterMesh.material.uniforms.severity.value = parseFloat(severity);
     if (window.app.mainScene.fog) window.app.mainScene.fog.density = 0;
 
-    // Visus (Unshaerfe durch Nebel simulieren)
-    if (visus === 'low') window.app.mainScene.fog.density = 0.05;
-    if (visus === 'severe') window.app.mainScene.fog.density = 0.15;
-    if (visus === 'blind') {
-        vrFilterMesh.material.uniforms.mode.value = 6; // Blind
+    if (filterStr === 'none') return;
+
+    // Simulationen mathematisch berechnen
+    if (filterStr === 'sim-blur') window.app.mainScene.fog.density = 0.05 + (severity * 0.02);
+    if (filterStr === 'sim-blind') {
+        vrFilterMesh.material.uniforms.mode.value = 6;
         vrFilterMesh.material.uniforms.opacity.value = 0.98;
     }
-
-    // Komplexe Shader-Simulationen anwenden
-    if (simMode === 'tunnel') {
+    if (filterStr === 'tunnel') {
         vrFilterMesh.material.uniforms.mode.value = 1;
         vrFilterMesh.material.uniforms.opacity.value = 1.0;
-    } else if (simMode === 'spot') {
+    }
+    if (filterStr === 'spot') {
         vrFilterMesh.material.uniforms.mode.value = 2;
         vrFilterMesh.material.uniforms.opacity.value = 1.0;
-    } else if (simMode === 'cataract') {
-        vrFilterMesh.material.uniforms.mode.value = 3;
-        vrFilterMesh.material.uniforms.opacity.value = 0.4;
-        window.app.mainScene.fog.density = 0.1;
-    } else if (simMode === 'glaucoma') {
-        vrFilterMesh.material.uniforms.mode.value = 4;
-        vrFilterMesh.material.uniforms.opacity.value = 0.8;
     }
-};
+    if (filterStr === 'sim-cataract') {
+        vrFilterMesh.material.uniforms.mode.value = 3;
+        vrFilterMesh.material.uniforms.opacity.value = 0.2 + (severity * 0.1);
+        window.app.mainScene.fog.density = 0.05 + (severity * 0.02);
+    }
+    if (filterStr === 'sim-glaucoma') {
+        vrFilterMesh.material.uniforms.mode.value = 4;
+        vrFilterMesh.material.uniforms.opacity.value = 0.5 + (severity * 0.1);
+    }
+}
+
+// Baut das neue, freistehende Menue am unteren Bildschirmrand
+function buildVRMenu() {
+    let container = document.getElementById('custom-vr-menu');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'custom-vr-menu';
+        container.style.cssText = 'position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 9999; background: rgba(17, 24, 39, 0.85); padding: 20px; border-radius: 16px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 600px;';
+
+        // 1. Slider für Schweregrad
+        const sliderRow = document.createElement('div');
+        sliderRow.style.cssText = 'width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 5px;';
+        sliderRow.innerHTML = `
+            <div style="display: flex; justify-content: space-between; color: white; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: bold;">
+                <span style="color: #9ca3af;">Schweregrad der Einschränkung</span>
+                <span id="vr-severity-val" style="color: #3b82f6;">Mittel (2.0)</span>
+            </div>
+            <input type="range" id="vr-severity-slider" min="0.5" max="3.0" step="0.1" value="2.0" style="width: 100%; cursor: pointer;">
+        `;
+        container.appendChild(sliderRow);
+
+        // 2. Buttons
+        const btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;';
+        
+        const addBtn = (id, text) => {
+            const b = document.createElement('button');
+            b.className = 'custom-vr-filter-btn';
+            b.dataset.filter = id;
+            b.innerText = text;
+            b.style.cssText = 'background: rgba(255,255,255,0.1); color: #d1d5db; border: 1px solid rgba(255,255,255,0.2); padding: 10px 16px; border-radius: 8px; cursor: pointer; font-family: "Inter", sans-serif; font-size: 13px; font-weight: 600; transition: all 0.2s;';
+            btnRow.appendChild(b);
+        };
+
+        addBtn('none', 'Normal');
+        addBtn('sim-blur', 'Unschärfe');
+        addBtn('sim-cataract', 'Grauer Star');
+        addBtn('sim-glaucoma', 'Grüner Star');
+        addBtn('tunnel', 'Tunnelblick');
+        addBtn('spot', 'Makula (Spot)');
+        addBtn('sim-blind', 'Blindheit');
+
+        container.appendChild(btnRow);
+        document.getElementById('vr-overlay').appendChild(container);
+
+        // State & Listeners
+        let currentActiveFilter = 'none';
+        const slider = document.getElementById('vr-severity-slider');
+        const valLabel = document.getElementById('vr-severity-val');
+
+        slider.addEventListener('input', (e) => {
+            valLabel.innerText = 'Wert: ' + e.target.value;
+            applyVRShader(currentActiveFilter, e.target.value);
+        });
+
+        const btns = container.querySelectorAll('.custom-vr-filter-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                btns.forEach(b => { b.style.background = 'rgba(255,255,255,0.1)'; b.style.color = '#d1d5db'; });
+                e.target.style.background = '#3b82f6';
+                e.target.style.color = 'white';
+                
+                currentActiveFilter = e.target.dataset.filter;
+                applyVRShader(currentActiveFilter, slider.value);
+            });
+        });
+        
+        // Initialsierung auf "Normal"
+        btns[0].style.background = '#3b82f6';
+        btns[0].style.color = 'white';
+    }
+    container.style.display = 'flex';
+}
 
 function initOverlayListeners() {
     const closeBtn = document.getElementById('vr-close-btn');
@@ -287,15 +345,26 @@ export async function startVRMode() {
         camera.add(vrFilterMesh);
         window.app.mainScene.add(camera);
 
-        // 4. Perspektive exakt auf den Avatar setzen (oder Raummitte)
-        // Die Hoehe wurde fuer die externe scene.glb abgesenkt (0.8 statt 1.62)
-        let startPos = new THREE.Vector3(0, 0.8, 0);
+        // 4. AUTO-AVATAR & Perspektive setzen
+        let avatarObj = null;
         window.app.mainScene.traverse((child) => {
-            if (child.userData && child.userData.isAvatar) {
-                startPos.copy(child.position);
-                startPos.y += 0.8; 
-            }
+            if (child.userData && child.userData.isAvatar) avatarObj = child;
         });
+        
+        // Wenn kein Avatar da ist, spawnen wir ihn automatisch im Hintergrund
+        if (!avatarObj && window.app.addFurniture) {
+            await window.app.addFurniture('avatar_procedural');
+            window.app.mainScene.traverse((child) => {
+                if (child.userData && child.userData.isAvatar) avatarObj = child;
+            });
+        }
+
+        // Kamera minimal noch tiefer (0.6)
+        let startPos = new THREE.Vector3(0, 0.6, 0); 
+        if (avatarObj) {
+            startPos.copy(avatarObj.position);
+            startPos.y += 0.6; 
+        }
         camera.position.copy(startPos);
 
         // 5. Gyroskop aktivieren
@@ -306,22 +375,13 @@ export async function startVRMode() {
             vrControls = null;
         }
 
-        // 6. UI anpassen (rechte Leiste bleibt)
+        // 6. Neues VR UI aufbauen
         toggleMainUI(false);
         const overlay = document.getElementById('vr-overlay');
         if (overlay) overlay.style.display = 'block';
 
-        // ALTE BUTTONS ENTFERNEN: Die unteren Filter-Buttons werden restlos ausgeblendet,
-        // da wir jetzt exklusiv die komplette rechte Leiste nutzen!
-        const oldFilterBtns = document.querySelectorAll('.vr-filter-btn');
-        if(oldFilterBtns.length > 0 && oldFilterBtns[0].parentElement) {
-            oldFilterBtns[0].parentElement.style.display = 'none';
-        }
-
         initOverlayListeners();
-        
-        // Initial einmal den Filter aus dem Haupt-UI synchronisieren
-        if (window.app.updateVisionEffects) window.app.updateVisionEffects();
+        buildVRMenu();
 
         // 7. Render-Loop starten
         const renderVR = () => {

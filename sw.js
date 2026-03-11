@@ -1,4 +1,4 @@
-const CACHE_NAME = 'elmeks-cache-v63'; 
+const CACHE_NAME = 'elmeks-cache-v64'; 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
