@@ -142,6 +142,10 @@ export const SIM_GLOSSARY = {
 
 export const ASSETS = {
   rooms: {
+    "scene.glb": { 
+        data: null, playableArea: { x: 10.0, z: 10.0 }, area: 100, name: "VR Szene",
+        acousticTargets: { warn: 0.25, good: 0.45 } 
+    },
     "raummodell_leer.glb": { 
         data: null, playableArea: { x: 4.4, z: 4.3 }, area: 50, name: "LLR Standard (Leer)",
         acousticTargets: { warn: 0.25, good: 0.45 } 

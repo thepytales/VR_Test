@@ -207,31 +207,15 @@ export async function startVRMode() {
             }
         }
 
-        // AUTO-FILL LOGIK: Wenn der Raum fast leer ist, spawnen wir ein Basis-Setup!
-        let furnitureCount = 0;
-        window.app.mainScene.traverse(c => {
-            if (c.userData && c.userData.typeId && !c.userData.isZone && !c.userData.isAvatar && !c.userData.isWallItem) {
-                furnitureCount++;
+        // VR-SZENE LADEN: Wechselt das Hauptmodell auf scene.glb und entfernt alle anderen Objekte
+        showVRLoader(true, 'Lade VR-Szene...');
+        try {
+            if (window.app.clearRoom && window.app.switchRoom) {
+                window.app.clearRoom(false);
+                await window.app.switchRoom('scene.glb');
             }
-        });
-
-        if (furnitureCount < 2 && window.app.addFurniture) {
-            showVRLoader(true, 'Baue SensAble Lab auf...');
-            try {
-                // Möbel spawnen und über die Scene-Hierarchie referenzieren (100% Fail-Safe)
-                await window.app.addFurniture('k6');
-                let t1 = window.app.mainScene.children[window.app.mainScene.children.length - 1];
-                if (t1) t1.position.set(-1.94, 0.22, -1.59);
-
-                await window.app.addFurniture('k6');
-                let t2 = window.app.mainScene.children[window.app.mainScene.children.length - 1];
-                if (t2) { t2.position.set(2.06, 0.22, -1.31); t2.rotation.y = 0.78; }
-
-                await window.app.addFurniture('board');
-                let board = window.app.mainScene.children[window.app.mainScene.children.length - 1];
-                if (board) board.position.set(0, 0.22, -3.85);
-                
-            } catch(e) { console.warn("Auto-Setup fehlgeschlagen", e); }
+        } catch(e) { 
+            console.warn("Laden der VR-Szene fehlgeschlagen", e); 
         }
         
         showVRLoader(true, 'VR/360° Modus wird initialisiert...');
