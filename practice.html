@@ -115,6 +115,7 @@
           
           <div class="pwa-content" style="flex-grow: 1; overflow-y: auto; padding: 40px; color: #d1d5db; line-height: 1.6; font-size: 15px; background: transparent;">
               
+              
               <div id="module-content-assistive" class="learning-module-content" style="display:none;">
                   <style>
                     .crowding-sim {
@@ -126,7 +127,14 @@
                   <div class="module-page" data-page="1">
                       <h3 style="color: white; margin-top: 0;">Informationsgrundlage: Assistive Technologien</h3>
                       <p>Assistive Technologien umfassen spezifische Hard- und Softwareapplikationen, die entwickelt wurden, um funktionale Einschränkungen von Menschen mit Behinderungen zu kompensieren. Im bildungswissenschaftlichen Diskurs gelten sie als essenzielle Voraussetzung für die autonome Teilhabe am Unterricht.</p>
-                      <p>Die Implementierung erfordert eine evidenzbasierte Diagnostik. Es gilt das Prinzip des Person-Environment-Task-Matchings: Ein Hilfsmittel ist nur dann effektiv, wenn es präzise auf die motorischen, sensorischen und kognitiven Ressourcen der Lernenden abgestimmt ist.</p>
+                      <p>Die Implementierung erfordert eine evidenzbasierte Diagnostik. Im Folgenden betrachten wir drei zentrale Zugangswege:</p>
+                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-top: 20px;">
+                          <ul style="color: #d1d5db; margin: 0; padding-left: 20px; line-height: 1.6;">
+                              <li style="margin-bottom: 10px;"><strong>Eindimensionale Eingabe (Scanning):</strong> Für Lernende mit stärksten motorischen Einschränkungen, bei denen oft nur eine einzige gezielte Muskelbewegung möglich ist.</li>
+                              <li style="margin-bottom: 10px;"><strong>Softwareseitige Wahrnehmungsanpassung:</strong> Typografische Modifikationen zur Reduktion der kognitiven Belastung bei Lese-Rechtschreib-Störungen (LRS).</li>
+                              <li><strong>Blicksteuerung (Eye-Tracking):</strong> Die Nutzung der Okulomotorik als direkter Mausersatz, was eine hohe visuelle Fokussierung erfordert.</li>
+                          </ul>
+                      </div>
                   </div>
 
                   <div class="module-page" data-page="2" style="display:none;">
@@ -144,10 +152,9 @@
                   </div>
 
                   <div class="module-page" data-page="3" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Interaktion: Assistive Technologien</h3>
-
-                      <h4 style="color: #f3f4f6; margin-top: 0; margin-bottom: 10px; font-size: 15px;">1-Taster-Steuerung (Scanning)</h4>
-                      <p>Lernende mit schwersten motorischen Einschränkungen nutzen oft nur einen einzigen Taster (Switch) zur Steuerung des Computers. Das System scannt automatisch durch alle Optionen. Klicken Sie exakt in dem Moment auf "Taster auslösen", wenn das Modul "Pause" markiert ist, um die erforderliche kognitive Leistung und das präzise Timing dieser Technologie nachzuempfinden.</p>
+                      <h3 style="color: white; margin-top: 0;">Interaktion: 1-Taster-Steuerung (Scanning)</h3>
+                      <p>Lernende mit schwersten motorischen Einschränkungen nutzen oft nur einen einzigen Taster (Switch) zur Steuerung des Computers. Das System scannt automatisch in einem festgelegten Intervall durch alle verfügbaren Optionen.</p>
+                      <p>Klicken Sie exakt in dem Moment auf "Taster auslösen", wenn das System das Modul "Pause" fokussiert. Diese Simulation veranschaulicht die erforderliche kognitive Antizipationsleistung und das präzise Timing, welches diese Technologie den Lernenden abverlangt.</p>
                       
                       <div style="background: #111113; padding: 20px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 20px; text-align: center;">
                           <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 30px;">
@@ -163,12 +170,15 @@
                           </div>
                       </div>
                       
-                      <div id="at-scan-feedback" style="font-weight: bold; display: none; padding: 15px; border-radius: 6px; text-align: center;"></div>
+                      <div id="at-scan-feedback" style="font-weight: bold; display: none; padding: 15px; border-radius: 6px; text-align: center; margin-bottom: 20px;"></div>
+
+                      <a href="https://www.hilfsmittelfinder.de/?selected=D4449B40-7B01-444B-AFF5-0950071C139E" target="_blank" style="display: inline-block; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">REHADAT: Datenbank für Taster & Schalter aufrufen</a>
                   </div>
 
                   <div class="module-page" data-page="4" style="display: none;">
                       <h3 style="color: white; margin-top: 0;">Interaktion: Typografischer Editor (LRS-Assistenz)</h3>
-                      <p>Leseassistenzen (wie der Immersive Reader) gehören zu den wichtigsten integrativen Technologien. Der nachfolgende Textblock simuliert visuelles Crowding (starke Überlagerung von Buchstaben), wie es bei einer Lese-Rechtschreib-Störung die Decodierung massiv erschwert. Konfigurieren Sie die Typografie so, dass die Barrierefreiheit hergestellt wird.</p>
+                      <p>Leseassistenzen gehören zu den wichtigsten integrativen Softwaretechnologien. Der nachfolgende Textblock simuliert visuelles Crowding (starke Überlagerung von Buchstaben), wie es bei einer Lese-Rechtschreib-Störung die Decodierung massiv erschwert.</p>
+                      <p>Nutzen Sie die Konfigurationsparameter, um eine barrierefreie Typografie herzustellen. Achten Sie auf Serifenlosigkeit, ausreichenden Zeichenabstand und einen weichen Kontrast.</p>
                       
                       <div style="display: flex; gap: 20px; margin-bottom: 25px;">
                           <div style="flex: 1; display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
@@ -206,16 +216,113 @@
                           </div>
                       </div>
                       
-                      <div id="at-lrs-text-container" class="crowding-sim" style="background: #ffffff; color: #000000; padding: 25px; border-radius: 4px; border-left: 4px solid #ef4444; font-family: 'Times New Roman', Times, serif; font-size: 16px; transition: all 0.3s;">
-                          Die systematische Anpassung von typografischen Leseparametern ist eine essenzielle Hauptfunktion moderner, inklusiver Lernumgebungen. Sie verhindert kognitive Überlastung.
+                      <div id="at-lrs-text-container" class="crowding-sim" style="background: #ffffff; color: #000000; padding: 25px; border-radius: 4px; border-left: 4px solid #ef4444; font-family: 'Times New Roman', Times, serif; font-size: 16px; transition: all 0.3s; margin-bottom: 20px;">
+                          Die systematische Anpassung von typografischen Leseparametern ist eine essenzielle Hauptfunktion moderner, inklusiver Lernumgebungen. Sie verhindert kognitive Überlastung bei der Textdecodierung.
                       </div>
 
-                      <div id="at-lrs-editor-feedback" style="margin-top: 15px; font-weight: bold; color: #10b981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 10px; border-radius: 6px; display: none; font-size: 14px;">Ausgezeichnete Parametrisierung. Die gewählte serifenlose Schrift, der erhöhte Zeichenabstand und der weichere Kontrast optimieren die visuelle Decodierung signifikant.</div>
+                      <div id="at-lrs-editor-feedback" style="margin-bottom: 20px; font-weight: bold; color: #10b981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 10px; border-radius: 6px; display: none; font-size: 14px;">Ausgezeichnete Parametrisierung. Die gewählte serifenlose Schrift, der erhöhte Zeichenabstand und der weichere Kontrast optimieren die visuelle Decodierung signifikant.</div>
+
+                      <a href="https://bik-fuer-alle.de/strukturierung-von-text-inhalten.html" target="_blank" style="display: inline-block; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">BIK für Alle: Richtlinien zur Lesbarkeit</a>
                   </div>
 
-                  <div class="module-page" data-page="5" style="display:none;">
+                  <div class="module-page" data-page="5" style="display: none;">
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Eye-Tracking (Verweildauer)</h3>
+                      <p>Wenn Lernende keine motorische Kontrolle über die Extremitäten haben, kann eine Blicksteuerung (Eye-Tracking) eingesetzt werden. Hierbei übernimmt die Augenbewegung die Funktion der Computermaus. Um einen "Klick" auszulösen, muss der Blick für eine definierte Dauer (Dwell-Time) auf einem Element ruhen, ohne abzuweichen.</p>
+                      <p>Simulieren Sie diesen Prozess: Bewegen Sie Ihren Mauszeiger auf die Zielzone und halten Sie ihn dort ruhig, bis der Ladebalken vollständig gefüllt ist. Wenn Sie die Zone zu früh verlassen, bricht der Vorgang ab.</p>
+                      
+                      <div style="background: rgba(0,0,0,0.2); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 250px;">
+                          
+                          <div id="gaze-target" onmouseenter="startGazeSimulation(this)" onmouseleave="stopGazeSimulation(this)" style="width: 120px; height: 120px; border-radius: 50%; background: #27272a; border: 3px dashed #4b5563; display: flex; align-items: center; justify-content: center; cursor: crosshair; transition: all 0.2s; position: relative; overflow: hidden;">
+                              <span style="color: #9ca3af; font-weight: bold; font-size: 14px; pointer-events: none; z-index: 2;">Zielzone</span>
+                              <div id="gaze-progress-fill" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 0%; background: rgba(59, 130, 246, 0.3); transition: height 0.1s linear; pointer-events: none; z-index: 1;"></div>
+                          </div>
+                          
+                          <div style="width: 200px; height: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; margin-top: 30px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+                              <div id="gaze-progress-bar" style="width: 0%; height: 100%; background: #3b82f6; transition: width 0.1s linear;"></div>
+                          </div>
+                          <div style="color: #9ca3af; font-size: 12px; margin-top: 8px; text-transform: uppercase;">Erforderliche Verweildauer: 2.0 Sekunden</div>
+                      </div>
+
+                      <div id="gaze-feedback-text" style="font-weight: bold; display: none; padding: 15px; border-radius: 6px; text-align: left; margin-bottom: 20px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;">
+                          Klick erfolgreich ausgelöst. Diese Interaktion verdeutlicht die visuelle Anstrengung, die Eye-Tracking erfordert. Ein überladenes Arbeitsblatt mit zu vielen kleinen Klickflächen führt hier extrem schnell zur Ermüdung.
+                      </div>
+
+                      <script>
+                          let gazeInterval;
+                          let gazePercent = 0;
+                          
+                          function startGazeSimulation(el) {
+                              if (gazePercent >= 100) return; 
+                              el.style.borderColor = '#3b82f6';
+                              gazeInterval = setInterval(() => {
+                                  gazePercent += 5; 
+                                  document.getElementById('gaze-progress-fill').style.height = gazePercent + '%';
+                                  document.getElementById('gaze-progress-bar').style.width = gazePercent + '%';
+                                  
+                                  if (gazePercent >= 100) {
+                                      clearInterval(gazeInterval);
+                                      el.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                                      el.style.borderColor = '#10b981';
+                                      document.getElementById('gaze-progress-fill').style.background = 'rgba(16, 185, 129, 0.3)';
+                                      document.getElementById('gaze-progress-bar').style.background = '#10b981';
+                                      document.getElementById('gaze-feedback-text').style.display = 'block';
+                                  }
+                              }, 100);
+                          }
+                          
+                          function stopGazeSimulation(el) {
+                              clearInterval(gazeInterval);
+                              if (gazePercent < 100) {
+                                  gazePercent = 0;
+                                  el.style.borderColor = '#4b5563';
+                                  document.getElementById('gaze-progress-fill').style.height = '0%';
+                                  document.getElementById('gaze-progress-bar').style.width = '0%';
+                              }
+                          }
+                      </script>
+
+                      <a href="https://www.hilfsmittelfinder.de/?selected=CF11E8E7-E47B-DC44-A9E4-BCF8D2733C95" target="_blank" style="display: inline-block; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">REHADAT: Augensteuerungssysteme ansehen</a>
+                  </div>
+
+                  <div class="module-page" data-page="6" style="display:none;">
                       <h3 style="color: white; margin-top: 0;">Zusammenfassung & Ausblick</h3>
-                      <p>Die Bereitstellung assistiver Technologien ist ein zweidimensionaler Prozess. Einerseits muss die Hardware-Schnittstelle (wie die 1-Taster-Steuerung) diagnostisch fundiert ausgewählt werden. Andererseits obliegt es den Lehrkräften, digitale Lernressourcen und Leseeinstellungen so zu konfigurieren, dass sie von den Systemen fehlerfrei verarbeitet und von den Lernenden kognitiv erfasst werden können.</p>
+                      <p>Die Bereitstellung und Konfiguration assistiver Technologien ist ein zweidimensionaler Prozess. Einerseits muss die Hardwareschnittstelle diagnostisch fundiert ausgewählt werden. Andererseits obliegt es den Lehrkräften, digitale Lernressourcen so aufzubereiten, dass sie von diesen Systemen fehlerfrei verarbeitet werden können.</p>
+                      
+                      <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  1-Taster-Steuerung (Scanning)
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Die Reduktion der Eingabe auf einen einzigen Taster erfordert vom System ein automatisches Scannen aller Interaktionspunkte. Dies bedeutet für die Lehrkraft: Die Benutzeroberfläche von Lernsoftware muss strikt logisch strukturiert sein. Zu viele verschachtelte Menüs machen das Navigieren via Scanning nahezu unmöglich.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Typografische Assistenz
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Lernende mit LRS oder visuellen Verarbeitungsstörungen profitieren massiv von Anpassungen der Darstellung. Die Entkopplung von Inhalt (Text) und Form (Aussehen) ist hier essenziell. Wenn Lehrkräfte starre PDFs ausgeben, sind solche individuellen Anpassungen von Schriftart und Zeichenabstand systemseitig blockiert.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Eye-Tracking & Blicksteuerung
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Blicksteuerungen erfordern eine hohe visuelle Konzentration und eine ausreichend lange Verweildauer auf Zielobjekten (Dwell-Time). Um einer rapiden Ermüdung vorzubeugen, müssen Lernmaterialien großflächige Interaktionszonen bieten und visuell extrem ruhig und übersichtlich gestaltet sein.
+                              </div>
+                          </details>
+                      </div>
+
+                      <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 25px;">
+                          <strong style="color: #9ca3af; font-size: 13px; text-transform: uppercase;">Native OS-Alternativen & Digitale Helfer</strong>
+                          <ul style="color: #d1d5db; font-size: 13px; line-height: 1.6; margin-top: 10px; padding-left: 20px;">
+                              <li><strong>Apple Bedienungshilfen:</strong> macOS und iOS bieten nativ integrierte Schaltersteuerungen und extrem tiefe Anpassungsmöglichkeiten der Typografie und Motorik.</li>
+                              <li><strong>Windows Center für erleichterte Bedienung:</strong> Bietet native Augensteuerungs-Integration (erfordert kompatiblen Tracker) und umfassende typografische Hochkontrast-Designs.</li>
+                              <li><strong>Immersive Reader (Microsoft):</strong> Kostenfreies Tool in Word und Edge, das Texte automatisch in lesefreundliche Typografie (LRS-optimiert) übersetzt.</li>
+                          </ul>
+                      </div>
                   </div>
               </div>
 
@@ -223,8 +330,15 @@
                   <div class="module-page" data-page="1">
                       <h3 style="color: white; margin-top: 0;">Informationsgrundlage: Hörschädigung</h3>
                       <p>Hörschädigungen im schulischen Kontext umfassen ein weites Spektrum, das von leichten Einschränkungen bis zur vollständigen Gehörlosigkeit reicht. In Deutschland weisen schätzungsweise 80.000 Kinder signifikante auditive Einschränkungen auf.</p>
-                      <p>Aus medizinischer Perspektive wird grundsätzlich zwischen peripherer und zentraler Hörschädigung differenziert. Die Ursachen unterteilen sich in Schallleitungsschwerhörigkeit (Störung im Außen- oder Mittelohr), Schallempfindungsschwerhörigkeit (Schädigung im Innenohr oder Hörnerv) und die Auditive Verarbeitungs- und Wahrnehmungsstörung (AVWS), bei welcher das Gehörte zentralnervös nicht korrekt verarbeitet werden kann.</p>
-                      <p>Assistive Technologien kompensieren den Verlust teilweise, stellen jedoch das natürliche Hörvermögen nicht vollständig wieder her. Die Raumakustik bleibt ein entscheidender exogener Faktor.</p>
+                      <p>Aus medizinischer Perspektive wird grundsätzlich zwischen peripherer und zentraler Hörschädigung differenziert. Assistive Technologien kompensieren den Verlust teilweise, stellen jedoch das natürliche Hörvermögen nicht vollständig wieder her.</p>
+                      <p>Die inklusive Beschulung erfordert eine gezielte Anpassung der Lernumgebung. Im Folgenden betrachten wir drei zentrale Aspekte:</p>
+                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-top: 20px;">
+                          <ul style="color: #d1d5db; margin: 0; padding-left: 20px; line-height: 1.6;">
+                              <li style="margin-bottom: 10px;"><strong>Raumakustik:</strong> Die gezielte Reduktion der Nachhallzeit und Störgeräusche durch architektonische und didaktische Maßnahmen.</li>
+                              <li style="margin-bottom: 10px;"><strong>Multimodale Sprachwahrnehmung:</strong> Die Notwendigkeit der visuellen Unterstützung (Mundbild, Mimik) zur Kompensation akustischer Defizite in der direkten Kommunikation.</li>
+                              <li><strong>Digitale Frequenzkompression:</strong> Die technische Funktionsweise moderner Hörsysteme, welche unhörbare Frequenzen in intakte Hörzonen verschieben.</li>
+                          </ul>
+                      </div>
                   </div>
 
                   <div class="module-page" data-page="2" style="display:none; box-sizing: border-box;">
@@ -266,10 +380,10 @@
                       </div>
 
                       <strong style="color: #9ca3af; display: block; margin-bottom: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Ideales Klassenzimmer (Elemente hierher ziehen)</strong>
-                      <div id="drop-target" ondrop="dropAcoustic(event)" ondragover="allowDropAcoustic(event)" style="display: flex; flex-wrap: wrap; align-content: flex-start; gap: 10px; min-height: 140px; padding: 20px; background: linear-gradient(145deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); border: 2px dashed rgba(156, 163, 175, 0.3); border-radius: 12px; box-sizing: border-box; box-shadow: inset 0 4px 15px rgba(0,0,0,0.5);">
+                      <div id="drop-target" ondrop="dropAcoustic(event)" ondragover="allowDropAcoustic(event)" style="display: flex; flex-wrap: wrap; align-content: flex-start; gap: 10px; min-height: 140px; padding: 20px; background: linear-gradient(145deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2)); border: 2px dashed rgba(156, 163, 175, 0.3); border-radius: 12px; box-sizing: border-box; box-shadow: inset 0 4px 15px rgba(0,0,0,0.5); margin-bottom: 20px;">
                       </div>
 
-                      <div id="acoustic-feedback" style="margin-top: 20px; font-weight: 500; font-size: 15px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; padding: 15px; border-radius: 8px; display: none; box-sizing: border-box; letter-spacing: 0.3px;">
+                      <div id="acoustic-feedback" style="margin-bottom: 20px; font-weight: 500; font-size: 15px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; padding: 15px; border-radius: 8px; display: none; box-sizing: border-box; letter-spacing: 0.3px;">
                           Hervorragende Auswahl. Diese Konfiguration etabliert eine inklusive Lehr- und Lernumgebung durch Minimierung akustischer und visueller Störfaktoren.
                       </div>
                   </div>
@@ -349,6 +463,8 @@
 
                           </div>
                       </div>
+
+                      <a href="https://www.rehadat.de/lexikon/Lex-Hoerbehinderung/" target="_blank" style="display: inline-block; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">REHADAT: Hilfsmittel für Hörbehinderung im Bildungsbereich</a>
                   </div>
 
                   <div class="module-page" data-page="5" style="display:none;">
@@ -400,17 +516,45 @@
                           
                           <div id="freq-feedback-komp" style="margin-top: 20px; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 13px; line-height: 1.5; border: 1px solid transparent; display: none;"></div>
                       </div>
+
+                      <a href="https://www.schwerhoerigen-netz.de/" target="_blank" style="display: inline-block; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">Deutscher Schwerhörigenbund e.V. (Startseite)</a>
                   </div>
 
                   <div class="module-page" data-page="6" style="display:none;">
                       <h3 style="color: white; margin-top: 0;">Zusammenfassung & Ausblick</h3>
-                      <p>Die Unterstützung von Lernenden mit Hörschädigungen erfordert ein duales Vorgehen: Physische Raumakustik (Teppiche, Decken) muss zwingend mit didaktischer Methodik (Lippenbild freihalten, Frontalunterricht bei Kerninformationen) kombiniert werden.</p>
-                      <p>Technische Hilfsmittel (Hörgeräte, FM-Anlagen) filtern und komprimieren Frequenzen hochkomplex, entlasten die Lernenden jedoch nicht immer kognitiv. Daher sollten begleitend visuelle Repräsentationsformen gewählt werden (Universal Design for Learning).</p>
+                      <p>Die Unterstützung von Lernenden mit Hörschädigungen erfordert ein duales Vorgehen: Physische Raumakustik muss zwingend mit didaktischer Methodik und dem Wissen um technische Hilfsmittel kombiniert werden.</p>
+
+                      <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Raumakustik und Positionierung
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Ein langer Nachhall erschwert die Sprachverständlichkeit massiv. Teppiche, Akustikdecken und eine U-förmige Sitzordnung reduzieren Störgeräusche und ermöglichen den visuellen Kontakt zu allen Sprechenden.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Multimodale Informationsaufnahme
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Lernende kompensieren unvollständige akustische Reize über das Lippenbild. Die Lehrkraft muss stets frontal zur Klasse sprechen und Gegenlicht (z.B. durch Fenster im Rücken) vermeiden, um das Gesicht nicht zu verschatten.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Grenzen der Frequenzkompression
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Technische Hilfsmittel filtern und komprimieren Frequenzen hochkomplex, entlasten die Lernenden jedoch nicht immer kognitiv. Die komprimierten Laute klingen oft unnatürlich und erfordern eine hohe Konzentrationsleistung.
+                              </div>
+                          </details>
+                      </div>
                       
-                      <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                      <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 25px;">
                           <strong style="color: #9ca3af; font-size: 13px; text-transform: uppercase;">Software-Alternativen & Digitale Helfer</strong>
                           <ul style="color: #d1d5db; font-size: 13px; line-height: 1.6; margin-top: 10px; padding-left: 20px;">
-                              <li><strong>AVA / Live Transcribe (Google):</strong> App-basierte Echtzeit-Transkription auf dem Smartphone oder Tablet der Lernenden.</li>
+                              <li><strong>AVA / Live Transcribe (Google):</strong> App-basierte Echtzeit-Transkription auf Endgeräten.</li>
                               <li><strong>Microsoft Translator:</strong> Ermöglicht Live-Untertitel in Gruppenarbeiten auf gekoppelten Endgeräten.</li>
                               <li><strong>PowerPoint Live-Untertitel:</strong> Native Integration in Office 365, um Präsentationen in Echtzeit visuell zu untertiteln.</li>
                           </ul>
@@ -421,83 +565,293 @@
               <div id="module-content-sehen" class="learning-module-content" style="display:none;">
                   <div class="module-page" data-page="1">
                       <h3 style="color: white; margin-top: 0;">Informationsgrundlage: Sehbeeinträchtigung</h3>
-                      <p>In Deutschland wird nicht erhoben, wie viele blinde und sehbehinderte Menschen hier leben. Schätzungen zufolge gibt es ca. 1,2 Millionen betroffene Menschen (REHADAT). Lediglich 1% aller Schüler:innen zählen zu dieser Gruppe.</p>
-                      <p>Eine Unterscheidung der Begriffe Sehschädigung, Sehbehinderung und Blindheit ist wichtig. Eine Sehbehinderung bedeutet nicht immer eine komplette Einschränkung: Menschen mit vorangeschrittenen Krankheiten und Gesichtsfeld- oder Visuseinschränkungen können in bestimmten Bereichen sehen. So ist es möglich, dass ein sehbehinderter Mensch Zeitung lesen kann und dennoch den weißen Langstock benötigt (Haasteren & Tomaszewski 2019).</p>
-                      <p>Ursachen können vielfältig sein, z. B. Retinitis Pigmentosa (Verlust des peripheren Sehens), Katarakt / Grauer Star (Trübung der Augenlinse, Kontrastverlust) oder CVI (Zerebrale Verarbeitungsstörung).</p>
+                      <p>In Deutschland wird nicht erhoben, wie exakt viele blinde und sehbeeinträchtigte Menschen hier leben. Schätzungen zufolge gibt es ca. 1,2 Millionen betroffene Menschen. Im schulischen Kontext bedeutet eine Sehbeeinträchtigung jedoch nicht zwingend eine vollständige Einschränkung.</p>
+                      <p>Menschen mit vorangeschrittenen Augenerkrankungen (Gesichtsfeld- oder Visuseinschränkungen) können oft noch in definierten Bereichen sehen. Ursachen sind vielfältig, wie z.B. Retinitis Pigmentosa (Verlust des peripheren Sehens) oder Katarakt (Trübung der Augenlinse).</p>
+                      <p>Die inklusive Aufbereitung von Materialien ist für diese Gruppe essenziell. Dieses Modul behandelt drei zentrale Aspekte:</p>
+                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-top: 20px;">
+                          <ul style="color: #d1d5db; margin: 0; padding-left: 20px; line-height: 1.6;">
+                              <li style="margin-bottom: 10px;"><strong>Visuelle Ausprägungen:</strong> Das Erleben verschiedener Sehbeeinträchtigungen aus der Ich-Perspektive zur Sensibilisierung.</li>
+                              <li style="margin-bottom: 10px;"><strong>Digitale Farbkontraste:</strong> Die Relevanz der strengen WCAG-Richtlinien für die Lesbarkeit von Materialien.</li>
+                              <li><strong>Hilfsmittel-Nutzung:</strong> Die kognitive Herausforderung bei der Nutzung starker Vergrößerungswerkzeuge (Bildschirmlesegeräte).</li>
+                          </ul>
+                      </div>
                   </div>
 
                   <div class="module-page" data-page="2" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Interaktive Aufgabe 1: Die "Ich-Perspektive"</h3>
-                      <p>Wähle einen Filter. Je nach Filter ändert sich der Text und das Passwort. Bewege deine Maus über die weiße Fläche (beim Tunnelblick musst du aktiv absuchen), finde das neue versteckte Passwort im Text und klicke es an!</p>
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Visuelle Einschränkungen</h3>
+                      <p>Wählen Sie einen Filter aus, um die visuelle Wahrnehmung bei unterschiedlichen Krankheitsbildern zu simulieren. Der Text und das gesuchte Lösungswort ändern sich je nach Filter. Bewegen Sie die Maus über die weiße Fläche (beim Tunnelblick müssen Sie die Fläche aktiv absuchen) und klicken Sie auf das Lösungswort.</p>
                       
-                      <div style="margin-bottom: 15px; display: flex; gap: 10px;">
-                          <button onclick="applyVisionInteractive('none')" style="background: #374151; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight:bold;">Normal</button>
+                      <div style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px;">
+                          <button onclick="applyVisionInteractive('none')" style="background: #374151; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight:bold;">Normales Sehen</button>
                           <button onclick="applyVisionInteractive('katarakt')" style="background: #374151; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight:bold;">Grauer Star</button>
-                          <button onclick="applyVisionInteractive('rp')" style="background: #374151; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight:bold;">Tunnelblick (RP)</button>
+                          <button onclick="applyVisionInteractive('rp')" style="background: #374151; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight:bold;">Tunnelblick</button>
                       </div>
 
-                      <div id="vision-reading-container" onmousemove="handleVisionReadingMove(event)" style="box-sizing: border-box; position: relative; width: 100%; height: 250px; background: #fff; color: #000; padding: 20px; border-radius: 8px; font-size: 16px; line-height: 1.6; overflow: hidden; cursor: crosshair;">
+                      <div id="vision-reading-container" onmousemove="handleVisionReadingMove(event)" style="box-sizing: border-box; position: relative; width: 100%; height: 250px; background: #fff; color: #000; padding: 20px; border-radius: 8px; font-size: 16px; line-height: 1.6; overflow: hidden; cursor: crosshair; transition: filter 0.3s ease;">
                           </div>
                       
-                      <div id="vision-reading-feedback" style="margin-top: 15px; font-weight: bold; color: #10b981; display: none;">Passwort gefunden! Super.</div>
+                      <div id="vision-reading-feedback" style="margin-top: 15px; font-weight: bold; color: #10b981; display: none; padding: 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px;">Lösungswort gefunden! Dies verdeutlicht die kognitive Anstrengung bei der Informationsbeschaffung.</div>
                   </div>
 
                   <div class="module-page" data-page="3" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Interaktive Aufgabe 2: Symptome zuordnen</h3>
-                      <p>Ordne die beschriebenen Symptome der richtigen Ursache zu.</p>
-                      <div style="margin-bottom: 15px;">
-                          <label style="display:block; font-size:13px; color:#9ca3af; margin-bottom:5px;">Trübung der Augenlinse, führt zu starkem Kontrastverlust und Unschärfe.</label>
-                          <select class="sehen-select" style="width:100%; background:#27272a; color:#fff; border:1px solid #374151; padding:10px; border-radius:6px; cursor:pointer;">
-                              <option value="" disabled selected>Bitte wählen...</option>
-                              <option value="katarakt">Katarakt (Grauer Star)</option>
-                              <option value="rp">Retinitis Pigmentosa</option>
-                              <option value="cvi">CVI</option>
-                          </select>
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Kontrast-Kalibrator</h3>
+                      <p>Ein unzureichender visueller Kontrast schließt Lernende mit Sehbeeinträchtigungen vom Unterrichtsmaterial aus. Die Web Content Accessibility Guidelines (WCAG) definieren Kontrastwerte (z. B. mindestens 4.5:1 für normalen Text), um sicherzustellen, dass visuelle Informationen decodierbar bleiben.</p>
+                      <p>Verändern Sie die Parameter für Text- und Hintergrundhelligkeit so, dass das Kontrastverhältnis mindestens das Level "AA (Gut)" erreicht.</p>
+                      
+                      <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+                          <div style="flex: 1; min-width: 250px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                              <div style="margin-bottom: 20px;">
+                                  <label style="display: flex; justify-content: space-between; color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">
+                                      <span>Texthelligkeit</span>
+                                      <span id="label-text-l">50%</span>
+                                  </label>
+                                  <input type="range" id="slider-text-l" min="0" max="100" value="50" oninput="updateWCAGContrast()" style="width: 100%; cursor: pointer;">
+                              </div>
+                              <div>
+                                  <label style="display: flex; justify-content: space-between; color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">
+                                      <span>Hintergrundhelligkeit</span>
+                                      <span id="label-bg-l">50%</span>
+                                  </label>
+                                  <input type="range" id="slider-bg-l" min="0" max="100" value="50" oninput="updateWCAGContrast()" style="width: 100%; cursor: pointer;">
+                              </div>
+                          </div>
+                          
+                          <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 15px;">
+                              <div id="contrast-preview" style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; border-radius: 12px; font-size: 18px; font-weight: bold; font-family: 'Inter', sans-serif; text-align: center; border: 1px solid rgba(255,255,255,0.1); background: hsl(0, 0%, 50%); color: hsl(210, 50%, 50%); transition: all 0.1s;">
+                                  Lesbarkeit im digitalen Raum
+                              </div>
+                              <div style="background: #111113; border: 1px solid #374151; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                  <div>
+                                      <div style="color: #9ca3af; font-size: 11px; text-transform: uppercase; font-weight: bold;">Kontrastverhältnis</div>
+                                      <div id="wcag-ratio-value" style="color: #f3f4f6; font-size: 20px; font-weight: bold;">1.00 : 1</div>
+                                  </div>
+                                  <div id="wcag-badge" style="padding: 6px 12px; border-radius: 20px; border: 1px solid #ef4444; background: rgba(239, 68, 68, 0.2); color: #ef4444; font-size: 12px; font-weight: bold;">
+                                      FAIL (Nicht barrierefrei)
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                      <div style="margin-bottom: 15px;">
-                          <label style="display:block; font-size:13px; color:#9ca3af; margin-bottom:5px;">Verlust des peripheren Sehens (Tunnelblick).</label>
-                          <select class="sehen-select" style="width:100%; background:#27272a; color:#fff; border:1px solid #374151; padding:10px; border-radius:6px; cursor:pointer;">
-                              <option value="" disabled selected>Bitte wählen...</option>
-                              <option value="katarakt">Katarakt (Grauer Star)</option>
-                              <option value="rp">Retinitis Pigmentosa</option>
-                              <option value="cvi">CVI</option>
-                          </select>
+                      
+                      <div style="margin-top: 20px;">
+                          <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank" style="display: inline-block; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 14px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">Offizielle WCAG-Richtlinien abrufen</a>
                       </div>
-                      <button onclick="checkSehenSelect()" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">Überprüfen</button>
-                      <div id="sehen-select-feedback" style="margin-top: 15px; font-weight: bold; display: none;"></div>
+
+                      <script>
+                          function updateWCAGContrast() {
+                              let l1 = parseInt(document.getElementById('slider-text-l').value);
+                              let l2 = parseInt(document.getElementById('slider-bg-l').value);
+                              
+                              document.getElementById('label-text-l').innerText = l1 + '%';
+                              document.getElementById('label-bg-l').innerText = l2 + '%';
+
+                              function hslToRgb(h, s, l) {
+                                  l /= 100;
+                                  const a = s * Math.min(l, 1 - l) / 100;
+                                  const f = n => {
+                                      const k = (n + h / 30) % 12;
+                                      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                                      return Math.round(255 * color);
+                                  };
+                                  return [f(0), f(8), f(4)];
+                              }
+
+                              let rgbText = hslToRgb(210, 50, l1);
+                              let rgbBg = hslToRgb(0, 0, l2);
+
+                              function lum(rgb) {
+                                  let a = rgb.map(function (v) {
+                                      v /= 255;
+                                      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+                                  });
+                                  return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+                              }
+
+                              let lumText = lum(rgbText);
+                              let lumBg = lum(rgbBg);
+
+                              let lightest = Math.max(lumText, lumBg);
+                              let darkest = Math.min(lumText, lumBg);
+                              let ratio = (lightest + 0.05) / (darkest + 0.05);
+
+                              document.getElementById('contrast-preview').style.color = 'hsl(210, 50%, ' + l1 + '%)';
+                              document.getElementById('contrast-preview').style.backgroundColor = 'hsl(0, 0%, ' + l2 + '%)';
+
+                              document.getElementById('wcag-ratio-value').innerText = ratio.toFixed(2) + ' : 1';
+
+                              let badge = document.getElementById('wcag-badge');
+                              if (ratio >= 7) {
+                                  badge.innerText = 'AAA (Exzellent)';
+                                  badge.style.background = 'rgba(16, 185, 129, 0.2)';
+                                  badge.style.color = '#10b981';
+                                  badge.style.borderColor = '#10b981';
+                              } else if (ratio >= 4.5) {
+                                  badge.innerText = 'AA (Gut)';
+                                  badge.style.background = 'rgba(16, 185, 129, 0.2)';
+                                  badge.style.color = '#10b981';
+                                  badge.style.borderColor = '#10b981';
+                              } else if (ratio >= 3) {
+                                  badge.innerText = 'Großer Text (Grenzwertig)';
+                                  badge.style.background = 'rgba(245, 158, 11, 0.2)';
+                                  badge.style.color = '#f59e0b';
+                                  badge.style.borderColor = '#f59e0b';
+                              } else {
+                                  badge.innerText = 'FAIL (Nicht barrierefrei)';
+                                  badge.style.background = 'rgba(239, 68, 68, 0.2)';
+                                  badge.style.color = '#ef4444';
+                                  badge.style.borderColor = '#ef4444';
+                              }
+                          }
+                          setTimeout(updateWCAGContrast, 100);
+                      </script>
                   </div>
 
                   <div class="module-page" data-page="4" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Wissensabfrage</h3>
-                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px;">
-                          <p style="font-weight: bold; color: white;">Was ist bezüglich Sehbehinderung und dem Bedarf an Hilfsmitteln wie dem weißen Langstock laut Text korrekt?</p>
-                          <label style="display:block; margin-bottom:10px; cursor:pointer;"><input type="radio" name="sq1" value="wrong"> Jeder, der den weißen Langstock benötigt, ist zu 100% vollblind.</label>
-                          <label style="display:block; margin-bottom:10px; cursor:pointer;"><input type="radio" name="sq1" value="correct"> Es ist möglich, dass eine Person Zeitung lesen kann und für die Fortbewegung dennoch den Langstock benötigt.</label>
-                          <label style="display:block; margin-bottom:10px; cursor:pointer;"><input type="radio" name="sq1" value="wrong"> Nur 20% aller Schüler weisen eine Sehbeeinträchtigung auf.</label>
-                          <button onclick="checkSehenMC()" style="margin-top:10px; background: #3b82f6; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;">Antworten</button>
-                          <div id="sq1-feedback" style="margin-top: 10px; font-weight: bold; display:none;"></div>
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Das Bildschirmlesegerät (CCTV)</h3>
+                      <p>Lernende mit starker Sehbeeinträchtigung nutzen für analoge Materialien häufig stationäre Bildschirmlesegeräte. Diese Kamerasysteme vergrößern das Dokument massiv, wodurch jedoch der visuelle Kontext (der Überblick) komplett verloren geht. Das Zusammenfügen der Informationen erfordert eine hohe kognitive Leistung.</p>
+                      <p>Steuern Sie den simulierten Kreuztisch (X- und Y-Achse), passen Sie den Zoom an und aktivieren Sie bei Bedarf den Falschfarbenmodus, um das schwach gedruckte Dokument zu entziffern. Suchen Sie die Dokumenten-ID (unten rechts auf dem Arbeitsblatt) und klicken Sie darauf.</p>
+
+                      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+                          <div style="flex: 1; min-width: 250px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 15px;">
+                              <div>
+                                  <label style="display: flex; justify-content: space-between; color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">
+                                      <span>Kreuztisch X-Achse (Rechts/Links)</span>
+                                  </label>
+                                  <input type="range" id="cctv-x" min="-150" max="150" value="0" oninput="updateCCTV()" style="width: 100%; cursor: pointer;">
+                              </div>
+                              <div>
+                                  <label style="display: flex; justify-content: space-between; color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">
+                                      <span>Kreuztisch Y-Achse (Hoch/Runter)</span>
+                                  </label>
+                                  <input type="range" id="cctv-y" min="-150" max="150" value="0" oninput="updateCCTV()" style="width: 100%; cursor: pointer;">
+                              </div>
+                              <div>
+                                  <label style="display: flex; justify-content: space-between; color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">
+                                      <span>Vergrößerung (Zoom)</span>
+                                      <span id="cctv-zoom-val" style="color: #3b82f6;">1.0x</span>
+                                  </label>
+                                  <input type="range" id="cctv-zoom" min="10" max="40" value="10" oninput="updateCCTV()" style="width: 100%; cursor: pointer;">
+                              </div>
+                              <button id="cctv-invert-btn" onclick="toggleCCTVInvert()" style="padding: 10px; background: #374151; color: white; border: 1px solid #4b5563; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.2s; margin-top: 10px;">Falschfarben: Aus</button>
+                          </div>
+
+                          <div style="flex: 1; min-width: 300px; height: 260px; background: #111113; border: 2px solid #374151; border-radius: 8px; overflow: hidden; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,1);">
+                              <div id="cctv-document" style="position: absolute; width: 100%; height: 100%; background: #f3f4f6; color: #d1d5db; padding: 20px; box-sizing: border-box; transition: transform 0.1s, filter 0.3s; transform-origin: center center; font-size: 8px; line-height: 1.4; display: flex; flex-direction: column; justify-content: space-between;">
+                                  <div>
+                                      <div style="font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #9ca3af;">Biologie-Arbeitsblatt: Die Pflanzenzelle</div>
+                                      <p>Die Pflanzenzelle ist die kleinste lebende Einheit der Pflanzen. Sie unterscheidet sich von der tierischen Zelle durch das Vorhandensein einer Zellwand, Vakuolen und Plastiden (wie den Chloroplasten). Diese Strukturen ermöglichen die Photosynthese.</p>
+                                      <p>Bitte bearbeiten Sie die folgenden Aufgaben sorgfältig und übertragen Sie die Ergebnisse in Ihr Heft.</p>
+                                  </div>
+                                  <div style="text-align: right; margin-top: 40px; font-size: 6px; color: #e5e7eb;">
+                                      Dokumenten-ID: <span id="cctv-solution" onclick="solveCCTV()" style="cursor: pointer; color: #d1d5db; font-weight: bold;">LUECKENTEXT</span>
+                                  </div>
+                              </div>
+                              <div style="position: absolute; top: 50%; left: 50%; width: 20px; height: 20px; border: 1px solid rgba(255,0,0,0.3); transform: translate(-50%, -50%); pointer-events: none; border-radius: 50%;"></div>
+                              <div style="position: absolute; top: 50%; left: 50%; width: 2px; height: 2px; background: rgba(255,0,0,0.5); transform: translate(-50%, -50%); pointer-events: none;"></div>
+                          </div>
                       </div>
+
+                      <div id="cctv-feedback" style="margin-top: 20px; font-weight: bold; color: #10b981; display: none; padding: 15px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px;">
+                          Code gefunden! Diese Interaktion verdeutlicht, wie anstrengend die visuelle Navigation ist. Das Lesen langer Fließtexte mit hohem Zoomfaktor erfordert extreme Konzentration, weshalb lineare Layouts für Arbeitsblätter bevorzugt werden sollten.
+                      </div>
+
+                      <script>
+                          let cctvInverted = false;
+                          function updateCCTV() {
+                              let x = document.getElementById('cctv-x').value;
+                              let y = document.getElementById('cctv-y').value;
+                              let zoom = document.getElementById('cctv-zoom').value / 10;
+                              
+                              document.getElementById('cctv-zoom-val').innerText = zoom.toFixed(1) + 'x';
+                              
+                              let doc = document.getElementById('cctv-document');
+                              doc.style.transform = `translate(${-x}px, ${-y}px) scale(${zoom})`;
+                          }
+
+                          function toggleCCTVInvert() {
+                              cctvInverted = !cctvInverted;
+                              let doc = document.getElementById('cctv-document');
+                              let btn = document.getElementById('cctv-invert-btn');
+                              
+                              if(cctvInverted) {
+                                  doc.style.filter = 'invert(1) hue-rotate(180deg) contrast(1.5)';
+                                  btn.style.background = '#10b981';
+                                  btn.style.borderColor = '#10b981';
+                                  btn.innerText = 'Falschfarben: An';
+                              } else {
+                                  doc.style.filter = 'none';
+                                  btn.style.background = '#374151';
+                                  btn.style.borderColor = '#4b5563';
+                                  btn.innerText = 'Falschfarben: Aus';
+                              }
+                          }
+
+                          function solveCCTV() {
+                              document.getElementById('cctv-feedback').style.display = 'block';
+                              document.getElementById('cctv-solution').style.color = '#10b981';
+                          }
+                          setTimeout(updateCCTV, 100);
+                      </script>
                   </div>
 
                   <div class="module-page" data-page="5" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Zusammenfassung & Weitere Informationen</h3>
-                      <p>Die simulierte Darstellung bestimmter Sehbeeinträchtigungen hat Ihnen hoffentlich einen Einblick in die unterschiedlichen Ausprägungen von Sehverlust gegeben und Sie auf die unterschiedlichen Bedürfnisse – je nach Krankheit – aufmerksam gemacht.</p>
-                      <p>WICHTIG: Die spezifische, medizinische Diagnostik ist selbstverständlich nicht Aufgabe der Lehrkraft. Dennoch sollten Sie sich der Ausprägungen bewusst sein, um besser auf die individuellen Bedarfe eingehen zu können.</p>
-                      <p>Gehen Sie individuell ins Gespräch mit den Lernenden und erarbeiten Sie gemeinsam Strategien zur Raumgestaltung (Kontraste, Blendfreiheit) und zur Informationsaufbereitung.</p>
+                      <h3 style="color: white; margin-top: 0;">Zusammenfassung & Ausblick</h3>
+                      <p>Die spezifische, medizinische Diagnostik ist nicht Aufgabe der Lehrkraft. Es ist jedoch essenziell, die grundlegenden Barrieren in der Wahrnehmung zu verstehen, um Informationsvermittlung inklusiv zu gestalten.</p>
+                      
+                      <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Visuelle Ausprägungen & Raumgestaltung
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Unterschiedliche Krankheiten (wie der Graue Star oder Retinitis Pigmentosa) erfordern ein hohes Maß an Ordnung im Klassenzimmer. Stühle oder Taschen im Weg werden bei einem stark eingeschränkten Sichtfeld schnell zur Stolperfalle.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Bedeutung von Farbkontrasten
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Grelle Hintergründe, ungünstige Farbkombinationen oder unruhige Muster erschweren die Decodierung von Text erheblich. Die Einhaltung der WCAG-Richtlinien (Kontrastverhältnis von mindestens 4.5:1) ist eine Grundvoraussetzung für barrierefreies Material.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Informationsfragmentierung (Zoom)
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Starke Vergrößerung durch Bildschirmlesegeräte reißt Informationen aus ihrem visuellen Kontext. Lernende müssen das Dokument mental neu zusammensetzen. Arbeitsblätter sollten daher linear aufgebaut sein und auf komplexe, verschachtelte Layouts verzichten.
+                              </div>
+                          </details>
+                      </div>
+
+                      <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 25px;">
+                          <strong style="color: #9ca3af; font-size: 13px; text-transform: uppercase;">Software-Alternativen & Digitale Helfer</strong>
+                          <ul style="color: #d1d5db; font-size: 13px; line-height: 1.6; margin-top: 10px; padding-left: 20px;">
+                              <li><strong>Windows Bildschirmlupe:</strong> Nativ integriertes Vergrößerungswerkzeug mit Falschfarben-Unterstützung.</li>
+                              <li><strong>Apple Zoom:</strong> Hochentwickelte, in macOS und iOS integrierte Bildschirmlupe.</li>
+                              <li><strong>OrCam MyEye:</strong> Eine KI-Kamera, die an der Brille befestigt wird und analoge Texte per Sprachausgabe vorliest.</li>
+                              <li><strong>Seeing AI (Microsoft):</strong> Kostenlose Smartphone-App, die kurze Texte und Dokumente in Echtzeit über die Handykamera erkennt.</li>
+                          </ul>
+                      </div>
                   </div>
               </div>
 
               <div id="module-content-tactonom" class="learning-module-content" style="display:none;">
                   <div class="module-page" data-page="1">
                       <h3 style="color: white; margin-top: 0;">Informationsgrundlage: Tactonom</h3>
-                      <p>Die folgende Lerneinheit stellt eine mögliche digitale Technologie vor, die Sie für Ihren inklusiven Unterricht einsetzen könnten - den Tactonom Reader. Auch wenn er als assistive Technologie für sehbeeinträchtigte Lernende konzipiert ist, werden Sie feststellen, dass sein Einsatz nicht darauf beschränkt sein muss.</p>
-                      <p>Der Tactonom verknüpft haptisch erfassbare Folien (taktile Grafiken) mit digitalen Audio-Informationen. Durch eine integrierte Kamera erkennt das Gerät die aufgelegte Grafik. Tippt der Lernende auf einen Bereich, wird die dazugehörige Audio-Spur abgespielt.</p>
-                      <p>Er bietet auch für sehende Lernende eine völlig neue Erfahrungsebene und bedient den im Schulunterricht oft verkannten Tastsinn.</p>
+                      <p>Die folgende Lerneinheit stellt eine digitale Technologie vor, die taktiles Lernen im inklusiven Unterricht ermöglicht: den Tactonom Reader. Dieses System verknüpft haptisch erfassbare Folien (taktile Grafiken) mit digitalen Audio-Informationen.</p>
+                      <p>Der Tastsinn wird im schulischen Kontext häufig vernachlässigt, bietet jedoch für alle Lernenden – insbesondere bei visuellen Beeinträchtigungen – einen essenziellen Zugang zur Welt. Die Implementierung erfordert spezifisches Wissen in drei Bereichen:</p>
+                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-top: 20px;">
+                          <ul style="color: #d1d5db; margin: 0; padding-left: 20px; line-height: 1.6;">
+                              <li style="margin-bottom: 10px;"><strong>Auditives Feedback:</strong> Die Verknüpfung von haptischer Position und räumlicher Klangausgabe zur Navigation.</li>
+                              <li style="margin-bottom: 10px;"><strong>Brailleschrift-Integration:</strong> Das Verständnis für das binäre 6-Punkte-System der taktilen Schrift.</li>
+                              <li><strong>Taktile Reduktion:</strong> Die didaktische Übersetzung komplexer visueller Grafiken in tastbare Strukturen ohne Reizüberflutung.</li>
+                          </ul>
+                      </div>
                   </div>
 
                   <div class="module-page" data-page="2" style="display:none;">
                       <h3 style="color: white; margin-top: 0;">Lernvideo: Taktiles Lernen</h3>
-
                       <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px;">
                           <h4 style="color: #f3f4f6; margin-top: 0; margin-bottom: 10px; font-size: 15px;">Video-Input: Tactonom Reader Showcase</h4>
                           <p style="font-size: 13px; color: #9ca3af; margin-bottom: 15px; line-height: 1.5;">Sehen Sie hier den Tactonom Reader in Aktion und lernen Sie die ersten Schritte sowie konkrete Anwendungsbeispiele im inklusiven Unterricht kennen.</p>
@@ -510,128 +864,204 @@
                   </div>
 
                   <div class="module-page" data-page="3" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Interaktion: Taktiles Lernen</h3>
-
-                      <h4 style="color: #f3f4f6; margin-top: 0; margin-bottom: 10px; font-size: 15px;">Interaktive Aufgabe 1: Taktiles Raster</h4>
-                      <p>Erlebe das Prinzip des Audio-Feedbacks. Bewege deine Maus über die schwarze Fläche. Das System gibt dir Feedback ("kalt", "wärmer"), bis du das versteckte Ziel blind gefunden hast und anklickst.</p>
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Auditive Raumorientierung</h3>
+                      <p>Der Tactonom nutzt eine Kamera, um die Fingerposition auf einer haptischen Grafik zu tracken, und ordnet dieser Position entsprechende Audio-Informationen zu. Dies ist für Lernende mit Seheinschränkungen essenziell, um auf einer leeren Fläche einen Orientierungssinn aufzubauen.</p>
+                      <p>In dieser Simulation fungiert Ihr Mauszeiger als tastender Finger. Bewegen Sie den Zeiger langsam über die schwarze Fläche. Das System wertet die Koordinaten aus und gibt Ihnen Feedback ("kalt", "wärmer"), bis Sie das versteckte, digitale Ziel "blind" ertastet haben.</p>
                       
                       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                          <span style="font-weight: bold; color: #9ca3af;">Audio-Feedback:</span>
-                          <span id="tactonom-audio-out" style="font-weight: bold; color: #3b82f6; font-size: 18px;">Bewege die Maus...</span>
+                          <span style="font-weight: bold; color: #9ca3af;">System-Feedback:</span>
+                          <span id="tactonom-audio-out" style="font-weight: bold; color: #3b82f6; font-size: 18px;">Bewegen Sie den Zeiger...</span>
                       </div>
 
                       <div id="tactile-grid" onmousemove="handleTactileMove(event)" onclick="handleTactileClick(event)" style="width: 100%; height: 250px; background: #000; border: 2px solid #374151; border-radius: 8px; cursor: crosshair; position: relative;">
                       </div>
-                      <div id="tactonom-feedback" style="margin-top: 15px; font-weight: bold; color: #10b981; display: none;">Ziel erfasst! So hilft das Audio-Feedback bei der räumlichen Orientierung.</div>
+                      <div id="tactonom-feedback" style="margin-top: 15px; font-weight: bold; color: #10b981; display: none; padding: 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px;">Ziel erfasst! Dieses Feedback-Prinzip ermöglicht den Aufbau einer mentalen Karte und fördert die eigenständige Navigation, was im Fachbereich Orientierung & Mobilität (O&M) von zentraler Bedeutung ist.</div>
+                      
+                      <a href="https://www.dbsv.org/orientierung-mobilitaet-o-m.html" target="_blank" style="display: inline-block; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; margin-top: 20px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">Orientierung & Mobilität (DBSV)</a>
                   </div>
 
                   <div class="module-page" data-page="4" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Interaktive Aufgabe 2: Sinnesverknüpfung</h3>
-                      <p>Klicke genau die zwei Sinne an, die vom Tactonom Reader primär miteinander verknüpft werden.</p>
-                      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
-                          <button class="sense-btn neutral-btn" data-correct="true" onclick="toggleNeutralBtn(this)" style="background: #27272a; color: #fff; border: 1px solid #374151; padding: 15px; border-radius: 6px; cursor: pointer;">Tastsinn (Haptik)</button>
-                          <button class="sense-btn neutral-btn" data-correct="false" onclick="toggleNeutralBtn(this)" style="background: #27272a; color: #fff; border: 1px solid #374151; padding: 15px; border-radius: 6px; cursor: pointer;">Geruchssinn</button>
-                          <button class="sense-btn neutral-btn" data-correct="true" onclick="toggleNeutralBtn(this)" style="background: #27272a; color: #fff; border: 1px solid #374151; padding: 15px; border-radius: 6px; cursor: pointer;">Gehör (Audio)</button>
-                          <button class="sense-btn neutral-btn" data-correct="false" onclick="toggleNeutralBtn(this)" style="background: #27272a; color: #fff; border: 1px solid #374151; padding: 15px; border-radius: 6px; cursor: pointer;">Geschmackssinn</button>
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Virtuelles Braille</h3>
+                      <p>Eine weitere Funktion digitaler Assistenzsysteme ist die Unterstützung beim Schriftspracherwerb. Der Tactonom kann ertastete Braille-Zellen vorlesen. So können Lernende die Brailleschrift autonom üben, ohne dass permanent eine Lehrkraft zur Kontrolle danebenstehen muss.</p>
+                      <p>Die Brailleschrift basiert auf einem 6-Punkte-System. Aktivieren Sie die korrekten Punkte im simulierten Raster, um den Buchstaben <strong>L</strong> zu formen (Punkte 1, 2 und 3). Klicken Sie danach auf Auswerten, um zu testen, ob das System den taktilen Input fehlerfrei interpretieren kann.</p>
+                      
+                      <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: center; margin-top: 30px; background: rgba(0,0,0,0.2); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                          
+                          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #27272a; padding: 25px; border-radius: 12px; border: 1px solid #4b5563; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);">
+                              <button class="braille-dot" data-dot="1" onclick="toggleBrailleDot(this)" style="width: 50px; height: 50px; border-radius: 50%; background: #111113; border: none; cursor: pointer; box-shadow: inset 0 4px 6px rgba(0,0,0,0.6); transition: all 0.1s; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">1</button>
+                              <button class="braille-dot" data-dot="4" onclick="toggleBrailleDot(this)" style="width: 50px; height: 50px; border-radius: 50%; background: #111113; border: none; cursor: pointer; box-shadow: inset 0 4px 6px rgba(0,0,0,0.6); transition: all 0.1s; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">4</button>
+                              <button class="braille-dot" data-dot="2" onclick="toggleBrailleDot(this)" style="width: 50px; height: 50px; border-radius: 50%; background: #111113; border: none; cursor: pointer; box-shadow: inset 0 4px 6px rgba(0,0,0,0.6); transition: all 0.1s; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">2</button>
+                              <button class="braille-dot" data-dot="5" onclick="toggleBrailleDot(this)" style="width: 50px; height: 50px; border-radius: 50%; background: #111113; border: none; cursor: pointer; box-shadow: inset 0 4px 6px rgba(0,0,0,0.6); transition: all 0.1s; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">5</button>
+                              <button class="braille-dot" data-dot="3" onclick="toggleBrailleDot(this)" style="width: 50px; height: 50px; border-radius: 50%; background: #111113; border: none; cursor: pointer; box-shadow: inset 0 4px 6px rgba(0,0,0,0.6); transition: all 0.1s; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">3</button>
+                              <button class="braille-dot" data-dot="6" onclick="toggleBrailleDot(this)" style="width: 50px; height: 50px; border-radius: 50%; background: #111113; border: none; cursor: pointer; box-shadow: inset 0 4px 6px rgba(0,0,0,0.6); transition: all 0.1s; display: flex; align-items: center; justify-content: center; color: #4b5563; font-weight: bold; font-size: 12px;">6</button>
+                          </div>
+                          
+                          <div style="display: flex; flex-direction: column; gap: 15px; max-width: 300px;">
+                              <button onclick="checkBrailleL()" style="background: #3b82f6; color: white; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">Zeichen auswerten</button>
+                              <div id="braille-feedback" style="display: none; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 13px; line-height: 1.5; border: 1px solid transparent;"></div>
+                              
+                              <a href="https://www.dbsv.org/brailleschrift-blindenschrift.html" target="_blank" style="display: inline-block; background: #374151; color: white; text-align: center; text-decoration: none; padding: 10px 15px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">Mehr zur Brailleschrift (DBSV)</a>
+                          </div>
+                          
                       </div>
-                      <div style="margin-top: 20px; text-align: right;">
-                          <button onclick="checkSenseTask()" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">Prüfen</button>
-                      </div>
-                      <div id="sense-feedback" style="margin-top: 15px; font-weight: bold; display: none;"></div>
+
+                      <audio id="audio-braille-click" src="./audio/braille_click.ogg" preload="auto"></audio>
+                      <audio id="audio-braille-success" src="./audio/braille_success.ogg" preload="auto"></audio>
+                      <audio id="audio-braille-error" src="./audio/braille_error.ogg" preload="auto"></audio>
+
+                      <script>
+                          function toggleBrailleDot(btn) {
+                              let audio = document.getElementById('audio-braille-click');
+                              if(audio) {
+                                  audio.currentTime = 0;
+                                  audio.play().catch(function(){});
+                              }
+                              
+                              if(btn.classList.contains('active')) {
+                                  btn.classList.remove('active');
+                                  btn.style.background = '#111113';
+                                  btn.style.boxShadow = 'inset 0 4px 6px rgba(0,0,0,0.6)';
+                                  btn.style.color = '#4b5563';
+                              } else {
+                                  btn.classList.add('active');
+                                  btn.style.background = '#e5e7eb';
+                                  btn.style.boxShadow = '0 4px 6px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.8)';
+                                  btn.style.color = '#e5e7eb';
+                              }
+                          }
+
+                          function checkBrailleL() {
+                              let activeDots = Array.from(document.querySelectorAll('.braille-dot.active')).map(function(b) {
+                                  return b.getAttribute('data-dot');
+                              });
+                              activeDots.sort();
+                              
+                              let isCorrect = activeDots.join(',') === '1,2,3';
+                              let fb = document.getElementById('braille-feedback');
+
+                              if(isCorrect) {
+                                  let audio = document.getElementById('audio-braille-success');
+                                  if(audio) { audio.currentTime = 0; audio.play().catch(function(){}); }
+                                  fb.style.display = 'block';
+                                  fb.style.color = '#10b981';
+                                  fb.style.background = 'rgba(16, 185, 129, 0.1)';
+                                  fb.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                                  fb.innerText = 'Korrekt! Das System hat das Zeichen "L" erkannt. Die auditive Bestätigung festigt das kognitive Konzept des Buchstabens bei der lernenden Person.';
+                              } else {
+                                  let audio = document.getElementById('audio-braille-error');
+                                  if(audio) { audio.currentTime = 0; audio.play().catch(function(){}); }
+                                  fb.style.display = 'block';
+                                  fb.style.color = '#ef4444';
+                                  fb.style.background = 'rgba(239, 68, 68, 0.1)';
+                                  fb.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                                  fb.innerText = 'Fehlerhaftes Zeichen. Die Hardware gibt einen Warnton aus. Bitte korrigieren Sie die Punkte. (Gesucht: 1, 2, 3)';
+                              }
+                          }
+                      </script>
                   </div>
 
                   <div class="module-page" data-page="5" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Einsatzszenario: Physik-Unterricht</h3>
-                      <p>Hier sehen Sie eine konkrete Idee, wie der Tactonom Reader im Physik-Unterricht zum Thema Halbleiter eingesetzt werden könnte.</p>
-                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-                          <strong style="color: #10b981; font-size: 15px;">Thema: Halbleiter (Silizium-Kristall)</strong>
-                          <ul style="color: #d1d5db; margin-top: 10px; line-height: 1.6;">
-                              <li><strong>Arbeitsblatt:</strong> Stellt ein Metall-Gitter dar.</li>
-                              <li><strong>Taktile Umsetzung:</strong> 
-                                  <ul style="margin-bottom: 10px;">
-                                      <li>Atome als haptische Kreise (Element-Symbol in Brailleschrift)</li>
-                                      <li>Freie Elektronen als erhabene Punkte</li>
-                                      <li>Elektronen-Löcher als leere, fühlbare Kreise</li>
-                                      <li>Positive und negative Elektroden an den Seiten durch unterschiedliche Struktur</li>
-                                  </ul>
-                              </li>
-                              <li><strong>Mögliche Audio-Aufgaben:</strong>
-                                  <ul>
-                                      <li>Bewegung der Elektronen und Löcher auf der Folie antippen und beschreiben lassen</li>
-                                      <li>Einzelne Gitter-Elemente blind ertasten und vom Gerät benennen lassen</li>
-                                      <li>Veränderungen der Leitfähigkeit bei Temperaturänderung erkunden</li>
-                                  </ul>
-                              </li>
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Visuelle Reduktion für taktile Medien</h3>
+                      <p>Bevor Grafiken haptisch erfahrbar gemacht werden (z. B. auf Schwellpapier für den Tactonom), müssen sie didaktisch reduziert werden. Visuelle Informationen wie Farbe, Schatten und Hintergrundmuster erzeugen im Tastbild ein undifferenziertes Chaos, das zu haptischer Reizüberflutung führt.</p>
+                      <p>Nutzen Sie den Schieberegler, um die hier vereinfachte Abbildung einer Zelle in eine taktil lesbare Grafik zu transformieren. Beobachten Sie, wie dekorative Elemente sukzessive entfernt werden, bis nur noch starke Kontraste übrig bleiben.</p>
+                      
+                      <div style="background: rgba(0,0,0,0.2); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-top: 20px;">
+                          
+                          <div style="margin-bottom: 25px;">
+                              <div style="display: flex; justify-content: space-between; font-size: 12px; color: #9ca3af; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">
+                                  <span>Visuelles Original</span>
+                                  <span>Taktiles Druckformat</span>
+                              </div>
+                              <input type="range" id="slider-tac-reduction" min="0" max="100" value="0" step="1" oninput="updateTactileReduction()" style="width: 100%; cursor: pointer;">
+                          </div>
+
+                          <div id="tac-reduction-container" style="background: #e0f2fe; border: 1px solid #374151; border-radius: 8px; height: 200px; position: relative; overflow: hidden; transition: background 0.3s;">
+                              <div id="tac-bg-pattern" style="position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(59,130,246,0.1) 10px, rgba(59,130,246,0.1) 20px); transition: opacity 0.3s;"></div>
+                              
+                              <div id="tac-cell" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: #3b82f6; border-radius: 50%; box-shadow: 10px 10px 20px rgba(0,0,0,0.4); border: 2px solid transparent; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
+                                  <span id="tac-label" style="color: white; font-size: 16px; font-family: sans-serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); transition: all 0.3s;">Zellkern</span>
+                              </div>
+                          </div>
+                          
+                          <div id="tac-reduction-feedback" style="display: none; padding: 15px; margin-top: 20px; border-radius: 8px; font-weight: bold; font-size: 13px; line-height: 1.5; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;">
+                              Perfekt! Alle Schatten, Farben und störenden Hintergrundmuster wurden eliminiert. Durch die Reduktion auf dicke, schwarze Konturlinien auf weißem Grund entsteht beim Drucken auf Schwellpapier ein klares, ertastbares Profil für die Lernenden.
+                          </div>
+                      </div>
+
+                      <script>
+                          function updateTactileReduction() {
+                              const val = parseInt(document.getElementById('slider-tac-reduction').value);
+                              const container = document.getElementById('tac-reduction-container');
+                              const bgPattern = document.getElementById('tac-bg-pattern');
+                              const cell = document.getElementById('tac-cell');
+                              const label = document.getElementById('tac-label');
+                              const fb = document.getElementById('tac-reduction-feedback');
+
+                              const opacityClutter = 1 - (val / 100);
+                              bgPattern.style.opacity = opacityClutter;
+                              
+                              cell.style.boxShadow = `10px 10px 20px rgba(0,0,0,${0.4 * opacityClutter})`;
+
+                              if (val > 80) {
+                                  container.style.background = '#ffffff';
+                                  cell.style.background = '#ffffff';
+                                  cell.style.border = '6px solid #000000';
+                                  label.style.color = '#000000';
+                                  label.style.textShadow = 'none';
+                                  label.style.fontWeight = 'bold';
+                                  fb.style.display = 'block';
+                              } else {
+                                  container.style.background = `rgba(${224 + (31 * (val/100))}, ${242 + (13 * (val/100))}, ${254 + (1 * (val/100))}, 1)`; // Übergang zu weiß
+                                  cell.style.background = `rgba(${59 + (196 * (val/100))}, ${130 + (125 * (val/100))}, ${246 + (9 * (val/100))}, 1)`; // Übergang zu weiß
+                                  cell.style.border = '2px solid transparent';
+                                  label.style.color = 'white';
+                                  label.style.textShadow = '2px 2px 4px rgba(0,0,0,0.8)';
+                                  label.style.fontWeight = 'normal';
+                                  fb.style.display = 'none';
+                              }
+                          }
+                      </script>
+                  </div>
+
+                  <div class="module-page" data-page="6" style="display:none;">
+                      <h3 style="color: white; margin-top: 0;">Zusammenfassung & Ausblick</h3>
+                      <p>Taktile und auditive Systeme eröffnen Lernenden mit visuellen Beeinträchtigungen einen autonomen Zugang zu Lehrmaterialien. Die didaktische Herausforderung liegt in der informationsreduzierten Aufbereitung der Materialien.</p>
+                      
+                      <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Raumorientierung durch Audio
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Das akustische Feedback bei Annäherung an ein Zielobjekt hilft Lernenden, mentale Karten von ansonsten leeren, abstrakten Flächen zu erstellen. Es ersetzt das fehlende visuelle Überblicksfeld und fördert die räumliche Autonomie.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Die Brailleschrift
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Das 6-Punkte-System ist international standardisiert. Auch wenn moderne Systeme viel über Audio lösen (Text-to-Speech), bleibt die Brailleschrift für die echte schriftsprachliche Alphabetisierung und Orthografie-Entwicklung unerlässlich.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Didaktische Reduktion
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Taktile Wahrnehmung ist sequenziell, nicht simultan wie das Sehen. Grafiken müssen massiv vereinfacht werden. Schatten, dekorative Elemente und zu feine Details müssen vor der Umwandlung in ein taktiles Format zwingend entfernt werden, um Reizüberflutung zu vermeiden.
+                              </div>
+                          </details>
+                      </div>
+
+                      <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 25px;">
+                          <strong style="color: #9ca3af; font-size: 13px; text-transform: uppercase;">Alternative & Ergänzende Tools</strong>
+                          <ul style="color: #d1d5db; font-size: 13px; line-height: 1.6; margin-top: 10px; padding-left: 20px;">
+                              <li><strong>Schwellkopierer (Fuser):</strong> Ein analoges Gerät, das spezielle Papiere erhitzt. Schwarze Linien quellen auf und werden sofort tastbar.</li>
+                              <li><strong>PIA (Pro Inklusiv Arbeitsblatt):</strong> Software zur automatisierten Erstellung barrierefreier und taktiler Arbeitsblätter.</li>
+                              <li><strong>Braillezeilen:</strong> Hardware-Geräte, die digitalen Text vom Computer dynamisch in tastbare Braille-Stifte übersetzen.</li>
                           </ul>
                       </div>
-                  </div>
-
-                  <div class="module-page" data-page="6" style="display:none; box-sizing: border-box;">
-                      <h3 style="color: white; margin-top: 0;">Wissensabfrage Tactonom</h3>
-                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px;">
-                          
-                          <div style="margin-bottom: 20px;">
-                              <p style="font-weight: bold; color: white; margin-bottom: 10px;">1. Wie viele Knöpfe hat der Tactonom Reader?</p>
-                              <select id="tac-q1" style="width:100%; background:#27272a; color:#fff; border:1px solid #374151; padding:10px; border-radius:6px; cursor:pointer;">
-                                  <option value="" disabled selected>Bitte wählen...</option>
-                                  <option value="wrong">4</option>
-                                  <option value="wrong">5</option>
-                                  <option value="wrong">6</option>
-                                  <option value="correct">7</option>
-                              </select>
-                          </div>
-
-                          <div style="margin-bottom: 20px;">
-                              <p style="font-weight: bold; color: white; margin-bottom: 10px;">2. Was ist beim Tactonom mit einem "zirkulären Menü" gemeint?</p>
-                              <select id="tac-q2" style="width:100%; background:#27272a; color:#fff; border:1px solid #374151; padding:10px; border-radius:6px; cursor:pointer;">
-                                  <option value="" disabled selected>Bitte wählen...</option>
-                                  <option value="wrong">Die Menü-Knöpfe sind rund.</option>
-                                  <option value="correct">Das Menü fängt von vorn an, sobald die letzte Option erreicht wurde.</option>
-                                  <option value="wrong">Die Knöpfe sind im Kreis angeordnet.</option>
-                              </select>
-                          </div>
-
-                          <div style="margin-bottom: 20px;">
-                              <p style="font-weight: bold; color: white; margin-bottom: 10px;">3. Wie erkennt der Tactonom Reader die Fingerposition des Lernenden?</p>
-                              <select id="tac-q3" style="width:100%; background:#27272a; color:#fff; border:1px solid #374151; padding:10px; border-radius:6px; cursor:pointer;">
-                                  <option value="" disabled selected>Bitte wählen...</option>
-                                  <option value="wrong">Über einen Touchscreen</option>
-                                  <option value="wrong">Durch Knöpfe unter dem Arbeitsblatt</option>
-                                  <option value="correct">Über eine Kamera über dem Arbeitsblatt</option>
-                              </select>
-                          </div>
-
-                          <div style="margin-bottom: 20px;">
-                              <p style="font-weight: bold; color: white; margin-bottom: 10px;">4. Wie erkennt der Tactonom Reader, welches Arbeitsblatt aufgelegt wurde?</p>
-                              <select id="tac-q4" style="width:100%; background:#27272a; color:#fff; border:1px solid #374151; padding:10px; border-radius:6px; cursor:pointer;">
-                                  <option value="" disabled selected>Bitte wählen...</option>
-                                  <option value="wrong">Durch ein Foto des Arbeitsblatts</option>
-                                  <option value="wrong">Gar nicht - es ist immer manuell einzustellen</option>
-                                  <option value="correct">Über einen QR-Code in der Ecke der Folie</option>
-                              </select>
-                          </div>
-
-                          <div style="margin-bottom: 20px;">
-                              <p style="font-weight: bold; color: white; margin-bottom: 10px;">5. Für wen ist der Tactonom Reader nützlich?</p>
-                              <select id="tac-q5" style="width:100%; background:#27272a; color:#fff; border:1px solid #374151; padding:10px; border-radius:6px; cursor:pointer;">
-                                  <option value="" disabled selected>Bitte wählen...</option>
-                                  <option value="wrong">Ausschließlich für völlig blinde Menschen, die Braille beherrschen.</option>
-                                  <option value="correct">Für blinde/sehbeeinträchtigte Menschen, bietet aber durch Multimodalität auch für sehende Lernende Vorteile.</option>
-                                  <option value="wrong">Nur für sehende Kinder im Kindergartenalter.</option>
-                              </select>
-                          </div>
-
-                          <button onclick="checkTactonomQuiz()" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">Quiz auswerten</button>
-                          <div id="tactonom-quiz-feedback" style="margin-top: 15px; font-weight: bold; display: none;"></div>
-
-                      </div>
-                  </div>
-
-                  <div class="module-page" data-page="7" style="display:none;">
-                      <h3 style="color: white; margin-top: 0;">Zusammenfassung & Weitere Informationen</h3>
-                      <p>Glückwunsch! Sie sind am Ende der Einheit angekommen. Der Tactonom Reader ist nur ein Beispiel für ein Gerät, welches als assistive Technologie konzipiert wurde, aber für ein breiteres Spektrum an Lernenden eingesetzt werden kann.</p>
-                      <p>Er bedient den im Schulunterricht oft verkannten Tastsinn, womit sich für Lernende eine weitere Erfahrungsebene eröffnet, was wiederum nach dem Prinzip der Multimodalität das Lernen begünstigt.</p>
-                      <p>Mit vermehrtem Einsatz solcher Technologien im Alltag sinken langfristig auch Preise und Stigmata werden abgebaut.</p>
                   </div>
               </div>
 
@@ -1023,7 +1453,15 @@
                       <div style="background: rgba(0,0,0,0.2); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
                           <button onclick="checkModuleTask(this, 'sozio', false)" style="padding: 12px; text-align: left; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer;">A) Vor der versammelten Klasse streng ermahnen und mit Sanktionen drohen.</button>
                           <button onclick="checkModuleTask(this, 'sozio', true)" style="padding: 12px; text-align: left; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer;">B) Die Situation beruhigen, eine kurze Auszeit anbieten und den Konflikt später unter vier Augen klären.</button>
-                          <button onclick="checkModuleTask(this, 'sozio', false)" style="padding: 12px; text
+                          <button onclick="checkModuleTask(this, 'sozio', false)" style="padding: 12px; text-align: left; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer;">C) Den Schüler ignorieren und den Unterricht nahtlos fortsetzen, um ihm keine Aufmerksamkeit zu schenken.</button>
+                      </div>
+                      <div class="task-feedback" style="display: none; margin-top: 15px; padding: 12px; border-radius: 8px; font-weight: bold; background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">Korrekt! Deeskalation bedeutet, Druck aus der Situation zu nehmen. Öffentliche Maßregelungen führen meist zu einer weiteren Eskalation.</div>
+                  </div>
+
+                  <div class="module-page" data-page="4" style="display: none;">
+                      <h3 style="color: white; margin-top: 0;">Zusammenfassung & Ausblick</h3>
+                      <p>Sozio-emotionale Förderung ist ein fortlaufender Prozess, der stark von der Beziehungsarbeit zwischen Lehrkraft und Lernenden abhängt. Durch Deeskalationsstrategien und das tiefere Verständnis für die Ursachen von Verhaltensauffälligkeiten schaffen Sie ein sicheres Lernklima für die gesamte Klasse.</p>
+                  </div>
               </div>
 
               <div id="module-content-classroom" class="learning-module-content" style="display: none;">
@@ -1106,14 +1544,20 @@
 
               <div id="module-content-bookcreator" class="learning-module-content" style="display: none;">
                   <div class="module-page" data-page="1">
-                      <h3 style="color: white; margin-top: 0;">Informationsgrundlage: Book Creator</h3>
-                      <p>Book Creator ist ein webbasiertes Autorenwerkzeug zur Erstellung digitaler Bücher. Aus inklusionspädagogischer Perspektive operationalisiert die Software den Ansatz des Universal Design for Learning (UDL), indem sie eine nahtlose Entkopplung von fachlichem Informationsgehalt und der Darbietungsform ermöglicht.</p>
-                      <p>Der Erwerb von Sachwissen darf nicht durch mangelnde schriftsprachliche Decodierungsfähigkeiten limitiert werden. Durch die Bereitstellung von Text, Auditiv-Funktionen (Text-to-Speech / Sprachaufzeichnung) und visueller Strukturierung wird die kognitive Belastung der Lernenden signifikant gesenkt.</p>
+                      <h3 style="color: white; margin-top: 0;">Informationsgrundlage: Book Creator & Multimodalität</h3>
+                      <p>Autorenwerkzeuge wie Book Creator operationalisieren den inklusionspädagogischen Ansatz des Universal Design for Learning (UDL). Sie ermöglichen die nahtlose Entkopplung von fachlichem Informationsgehalt und der Darbietungsform, wodurch Barrieren im Lernprozess systematisch abgebaut werden.</p>
+                      <p>Der Erwerb von Sachwissen darf nicht durch mangelnde schriftsprachliche Decodierungsfähigkeiten limitiert werden. In den folgenden zwei Interaktionen erproben Sie zentrale Funktionen, um Materialien adaptiv und inklusiv zu gestalten:</p>
+                      <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-top: 20px;">
+                          <ul style="color: #d1d5db; margin: 0; padding-left: 20px; line-height: 1.6;">
+                              <li style="margin-bottom: 10px;"><strong>Multimodale Materialerweiterung:</strong> Die systematische Verknüpfung von Text, Bild und Audio, um unterschiedliche Wahrnehmungskanäle zu bedienen.</li>
+                              <li><strong>Kognitive Entlastung (Chunking):</strong> Die Strukturierung großer Textblöcke in kleine, gut verdauliche Informationseinheiten zur Vermeidung von Überforderung.</li>
+                          </ul>
+                      </div>
                   </div>
                   
                   <div class="module-page" data-page="2" style="display: none;">
                       <h3 style="color: white; margin-top: 0;">Interaktion: Multimediale Materialerweiterung</h3>
-                      <p>Ein rein textbasiertes Arbeitsblatt stellt für viele Lernende eine exkludierende Barriere dar. Nutzen Sie das simulierte Aktionsmenü, um die leere Buchseite um eine visuelle sowie eine auditive Repräsentationsebene zu erweitern.</p>
+                      <p>Ein rein textbasiertes Arbeitsblatt stellt für viele Lernende eine exkludierende Barriere dar. Nutzen Sie das simulierte Aktionsmenü, um die leere Buchseite um eine visuelle sowie eine auditive Repräsentationsebene zu erweitern, sodass Lernende den Kanal wählen können, der ihnen am besten entspricht.</p>
                       
                       <div style="background: #ffffff; border-radius: 8px; padding: 20px; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); min-height: 250px; position: relative;">
                           <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 20px; position: relative;">
@@ -1122,8 +1566,8 @@
                               <button onclick="toggleBCMenu()" style="background: #3b82f6; color: white; border: none; border-radius: 50%; width: 35px; height: 35px; font-size: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">+</button>
                               
                               <div id="bc-add-menu" style="display: none; position: absolute; top: 45px; right: 0; background: #1f2937; border: 1px solid #374151; border-radius: 6px; width: 180px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); z-index: 10;">
-                                  <div onclick="addBCItem('audio')" style="padding: 12px; color: #d1d5db; border-bottom: 1px solid #374151; cursor: pointer; font-size: 13px;">Aufnahme (Audio)</div>
-                                  <div onclick="addBCItem('visual')" style="padding: 12px; color: #d1d5db; cursor: pointer; font-size: 13px;">Kamera (Bild)</div>
+                                  <div onclick="addBCItem('audio')" style="padding: 12px; color: #d1d5db; border-bottom: 1px solid #374151; cursor: pointer; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#374151'" onmouseout="this.style.background='transparent'">Audiospur aufzeichnen</div>
+                                  <div onclick="addBCItem('visual')" style="padding: 12px; color: #d1d5db; cursor: pointer; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#374151'" onmouseout="this.style.background='transparent'">Piktogramm einfügen</div>
                               </div>
                           </div>
 
@@ -1132,27 +1576,104 @@
                               <div style="font-size: 13px; color: #4b5563; line-height: 1.6;">Pflanzen nutzen Lichtenergie, um aus Kohlenstoffdioxid und Wasser Sauerstoff und Glukose zu produzieren. Dieser Prozess ist die Grundlage allen Lebens auf der Erde.</div>
                               
                               <div style="display: flex; gap: 15px; margin-top: 10px;">
-                                  <div id="bc-page-audio" style="display: none; background: #dbeafe; border: 1px solid #bfdbfe; color: #1e3a8a; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; width: fit-content;">▶ Audiospur abspielen (0:15)</div>
-                                  <div id="bc-page-visual" style="display: none; background: #e5e7eb; border: 1px dashed #9ca3af; color: #6b7280; padding: 20px; border-radius: 8px; font-size: 11px; text-transform: uppercase; text-align: center; width: 120px;">Abbildung<br>eines Baumes</div>
+                                  <div id="bc-page-audio" style="display: none; background: #dbeafe; border: 1px solid #bfdbfe; color: #1e3a8a; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; width: fit-content; align-items: center; gap: 5px;">
+                                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Audiospur abspielen (0:15)
+                                  </div>
+                                  <div id="bc-page-visual" style="display: none; background: #e5e7eb; border: 1px dashed #9ca3af; color: #6b7280; padding: 20px; border-radius: 8px; font-size: 11px; text-transform: uppercase; text-align: center; width: 120px; justify-content: center; align-items: center;">
+                                      Visualisierung
+                                  </div>
                               </div>
                           </div>
                       </div>
 
-                      <div id="bc-page-feedback" style="font-weight: bold; display: none; color: #10b981; margin-top: 15px; padding: 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px;">Transformation erfolgreich. Das Lernmaterial repräsentiert das Wissen nun auf verschiedenen Wahrnehmungskanälen und entspricht den UDL-Richtlinien.</div>
+                      <div id="bc-page-feedback" style="font-weight: bold; display: none; color: #10b981; margin-top: 15px; padding: 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px;">Transformation erfolgreich. Das Lernmaterial repräsentiert das Wissen nun auf verschiedenen Wahrnehmungskanälen und entspricht den UDL-Richtlinien zur Bereitstellung vielfältiger Darstellungsmittel.</div>
+                      
+                      <a href="https://udlguidelines.cast.org/" target="_blank" style="display: inline-block; margin-top: 20px; background: #374151; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s;" onmouseover="this.style.background='#4b5563'" onmouseout="this.style.background='#374151'">CAST: Universal Design for Learning Guidelines</a>
                   </div>
 
                   <div class="module-page" data-page="3" style="display: none;">
+                      <h3 style="color: white; margin-top: 0;">Interaktion: Kognitive Entlastung durch Strukturierung</h3>
+                      <p>Ein massiver Textblock wirkt auf Lernende mit Leseschwäche oder kognitiver Beeinträchtigung oft bedrohlich und führt zum sofortigen Abbruch. Nutzen Sie den Schieberegler, um den Text sukzessive didaktisch zu reduzieren und in überschaubare Einheiten zu zerlegen ("Chunking").</p>
+                      
+                      <div style="background: rgba(0,0,0,0.2); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px;">
+                          <div style="margin-bottom: 25px;">
+                              <div style="display: flex; justify-content: space-between; font-size: 12px; color: #9ca3af; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">
+                                  <span>Stufe 1: Massiver Textblock</span>
+                                  <span>Stufe 5: Visualisiertes Chunking</span>
+                              </div>
+                              <input type="range" id="slider-bc-chunk" min="1" max="5" value="1" step="1" oninput="updateBCChunking()" style="width: 100%; cursor: pointer;">
+                          </div>
+
+                          <div id="bc-chunk-container" style="min-height: 250px; display: flex; flex-direction: column; justify-content: center;">
+                              <div style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #d1d5db; line-height: 1.6; font-size: 13px;">
+                                  Pflanzen nutzen bei der Photosynthese die Lichtenergie der Sonne, um aus Kohlenstoffdioxid aus der Luft und Wasser aus dem Boden den lebenswichtigen Sauerstoff und Glukose als Energielieferanten zu produzieren. Dieser hochkomplexe biochemische Prozess ist die absolute Grundlage allen Lebens auf der Erde und findet mikroskopisch betrachtet in den Chloroplasten der Pflanzenzellen statt. Dabei wird das Sonnenlicht von dem grünen Farbstoff Chlorophyll absorbiert. Ohne diesen Vorgang gäbe es weder ausreichend Sauerstoff zum Atmen für Menschen und Tiere, noch eine funktionierende Nahrungskette, da Pflanzen die primären Produzenten von Biomasse darstellen. Die Photosynthese ist somit der wichtigste biologische Vorgang unseres Planeten, der kontinuierlich die Atmosphäre reinigt und gleichzeitig Energie für das Wachstum der Flora bereitstellt.
+                              </div>
+                          </div>
+                      </div>
+
+                      <div id="bc-chunk-feedback" style="display: none; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 13px; line-height: 1.5; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;">
+                          Ausgezeichnet! Die Informationen wurden in ein sequenzielles Comic-Panel-Layout übersetzt. Dies reduziert die kognitive Belastung drastisch, da die Lernenden die Informationen Schritt für Schritt verarbeiten können.
+                      </div>
+                  </div>
+
+                  <div class="module-page" data-page="4" style="display: none;">
                       <h3 style="color: white; margin-top: 0;">Zusammenfassung & Alternativen</h3>
                       <p>Softwarelösungen zur multimodalen Aufbereitung transformieren statische Lehrwerke in adaptive Lernumgebungen. Die Anpassung an die Lernenden erfolgt systemseitig (Assimilierung) anstatt eine fortlaufende Akkommodation der Schüler:innen an starre Materialien zu erzwingen.</p>
-                      <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                      
+                      <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Multimodalität
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Die Verknüpfung von Text, Audio und Bild stellt sicher, dass Beeinträchtigungen in einem Wahrnehmungskanal durch einen anderen kompensiert werden können. Dies ist ein Grundpfeiler des Universal Design for Learning.
+                              </div>
+                          </details>
+                          <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;">
+                              <summary style="padding: 15px 20px; color: #f3f4f6; font-size: 14px; font-weight: 600; cursor: pointer; user-select: none; outline: none; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02);">
+                                  Informationsstrukturierung
+                              </summary>
+                              <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); font-size: 13px; color: #d1d5db; line-height: 1.6;">
+                                  Das sogenannte Chunking reduziert die kognitive Last (Cognitive Load Theory). Anstatt die Arbeitsgedächtniskapazität durch lange Textwüsten zu überlasten, werden Informationen schrittweise dargeboten.
+                              </div>
+                          </details>
+                      </div>
+
+                      <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 25px;">
                           <strong style="color: #9ca3af; font-size: 13px; text-transform: uppercase;">Zulässige Software-Alternativen</strong>
                           <ul style="color: #d1d5db; font-size: 13px; line-height: 1.6; margin-top: 10px; padding-left: 20px;">
-                              <li><strong>Canva for Education:</strong> Hervorragend für visuelles Layouting und kollaboratives Arbeiten.</li>
-                              <li><strong>Apple Keynote / Pages:</strong> Bietet tief integrierte Lesehilfen und Audio-Aufnahme-Features nativ in iOS/macOS.</li>
-                              <li><strong>Microsoft PowerPoint:</strong> Enthält den systemweiten "Immersive Reader" sowie automatisierte Live-Untertitelung.</li>
+                              <li><strong>Canva for Education:</strong> Hervorragend für visuelles Layouting und kollaboratives Arbeiten in Kleingruppen.</li>
+                              <li><strong>Apple Keynote / Pages:</strong> Bietet tief integrierte Lesehilfen und Audio-Aufnahme-Features nativ in iOS und macOS.</li>
+                              <li><strong>Microsoft PowerPoint:</strong> Enthält den systemweiten "Immersive Reader" (Plastischer Reader), der Texte analysiert, Silben trennt und vorliest.</li>
                           </ul>
                       </div>
                   </div>
+                  
+                  <script>
+                      // Skript für Book Creator Modul - Interaktion 2 (Chunking)
+                      function updateBCChunking() {
+                          let val = parseInt(document.getElementById('slider-bc-chunk').value);
+                          let container = document.getElementById('bc-chunk-container');
+                          let feedback = document.getElementById('bc-chunk-feedback');
+
+                          if (val === 1) {
+                              container.innerHTML = '<div style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #d1d5db; line-height: 1.6; font-size: 13px;">Pflanzen nutzen bei der Photosynthese die Lichtenergie der Sonne, um aus Kohlenstoffdioxid aus der Luft und Wasser aus dem Boden den lebenswichtigen Sauerstoff und Glukose als Energielieferanten zu produzieren. Dieser hochkomplexe biochemische Prozess ist die absolute Grundlage allen Lebens auf der Erde und findet mikroskopisch betrachtet in den Chloroplasten der Pflanzenzellen statt. Dabei wird das Sonnenlicht von dem grünen Farbstoff Chlorophyll absorbiert. Ohne diesen Vorgang gäbe es weder ausreichend Sauerstoff zum Atmen für Menschen und Tiere, noch eine funktionierende Nahrungskette, da Pflanzen die primären Produzenten von Biomasse darstellen. Die Photosynthese ist somit der wichtigste biologische Vorgang unseres Planeten, der kontinuierlich die Atmosphäre reinigt und gleichzeitig Energie für das Wachstum der Flora bereitstellt.</div>';
+                              feedback.style.display = 'none';
+                          } else if (val === 2) {
+                              container.innerHTML = '<div style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #d1d5db; line-height: 1.6; font-size: 13px;"><strong>Was passiert bei der Photosynthese?</strong><br>Pflanzen nutzen die Lichtenergie der Sonne, um aus Kohlenstoffdioxid (Luft) und Wasser (Boden) Sauerstoff und Glukose zu produzieren.<br><br><strong>Wo findet sie statt?</strong><br>Dieser Prozess findet in den Chloroplasten der Pflanzenzellen statt. Dort wird das Sonnenlicht von dem grünen Farbstoff Chlorophyll absorbiert.<br><br><strong>Warum ist sie wichtig?</strong><br>Ohne sie gäbe es keinen Sauerstoff zum Atmen und keine Nahrungskette. Sie ist der wichtigste biologische Vorgang unseres Planeten.</div>';
+                              feedback.style.display = 'none';
+                          } else if (val === 3) {
+                              container.innerHTML = '<div style="padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #d1d5db; line-height: 1.6; font-size: 13px;"><strong>Die Photosynthese im Überblick:</strong><ul style="margin-top: 8px; padding-left: 20px; line-height: 1.8;"><li><strong>Pflanzen brauchen:</strong> Sonnenlicht, Kohlenstoffdioxid und Wasser.</li><li><strong>Pflanzen produzieren:</strong> Sauerstoff (zum Atmen) und Glukose (als Energie).</li><li><strong>Ort des Geschehens:</strong> In den Chloroplasten der Pflanzenzelle.</li><li><strong>Bedeutung:</strong> Grundlage für fast alles Leben auf der Erde.</li></ul></div>';
+                              feedback.style.display = 'none';
+                          } else if (val === 4) {
+                              container.innerHTML = '<div style="display: flex; flex-direction: column; gap: 10px;"><div style="padding: 15px; background: rgba(255,255,255,0.05); border-left: 4px solid #3b82f6; border-radius: 4px; color: #d1d5db; font-size: 13px;"><strong>Schritt 1: Aufnahme</strong><br>Die Pflanze nimmt Sonnenlicht, Wasser und Kohlenstoffdioxid auf.</div><div style="padding: 15px; background: rgba(255,255,255,0.05); border-left: 4px solid #3b82f6; border-radius: 4px; color: #d1d5db; font-size: 13px;"><strong>Schritt 2: Verarbeitung</strong><br>In den Blättern (Chloroplasten) wird daraus neue Energie gemacht.</div><div style="padding: 15px; background: rgba(255,255,255,0.05); border-left: 4px solid #10b981; border-radius: 4px; color: #d1d5db; font-size: 13px;"><strong>Ergebnis: Ausgabe</strong><br>Die Pflanze gibt frischen Sauerstoff und Glukose ab.</div></div>';
+                              feedback.style.display = 'none';
+                          } else if (val === 5) {
+                              container.innerHTML = '<div style="display: flex; gap: 10px; font-size: 12px; color: #d1d5db; height: 100%;"><div style="flex: 1; padding: 20px 15px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; text-align: center; display: flex; flex-direction: column; justify-content: center;"><div style="font-weight: bold; margin-bottom: 12px; color: #60a5fa; text-transform: uppercase;">1. Zutaten</div>Licht, Wasser und<br>Kohlenstoffdioxid</div><div style="flex: 1; padding: 20px 15px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; text-align: center; display: flex; flex-direction: column; justify-content: center;"><div style="font-weight: bold; margin-bottom: 12px; color: #60a5fa; text-transform: uppercase;">2. Fabrik</div>Verarbeitung in den<br>Chloroplasten</div><div style="flex: 1; padding: 20px 15px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; text-align: center; display: flex; flex-direction: column; justify-content: center;"><div style="font-weight: bold; margin-bottom: 12px; color: #34d399; text-transform: uppercase;">3. Produkt</div>Sauerstoff und<br>Glukose</div></div>';
+                              feedback.style.display = 'block';
+                          }
+                      }
+                  </script>
               </div>
 
           </div>
@@ -2058,9 +2579,9 @@
       // --- LOGIK: MODUL SEHEN ---
       let currentVisionInteractive = 'none';
       const visionTexts = {
-          'none': `Der Schulalltag ist voller visueller Reize. An der Tafel stehen wichtige Formeln, im Buch gibt es kleine Diagramme und auf dem Boden liegen oft Schulranzen im Weg. Für Menschen mit einer Sehbehinderung kann das ständige Fokussieren extrem anstrengend sein. Die Inklusion erfordert daher eine aufmerksame Raumgestaltung. Das erste versteckte Lösungswort lautet <span onclick="checkVisionPw('none')" style="cursor:pointer; color:inherit; font-weight:inherit;">Barrierefreiheit</span>. Wer das findet, hat das Prinzip verstanden. Achten Sie auf gute Ausleuchtung.`,
-          'katarakt': `Eine Trübung der Linse führt dazu, dass alles wie durch einen dichten Nebel erscheint. Farben verblassen und grelles Licht blendet stark. Schwarze Schrift auf weißem Grund kann extrem unangenehm sein. Oft helfen nur invertierte Farben oder eine starke <span onclick="checkVisionPw('katarakt')" style="cursor:pointer; color:inherit; font-weight:inherit;">Kontrastverstärkung</span> an Tafeln und Arbeitsblättern. Selbst große Objekte im Raum verschmelzen mit dem Hintergrund, wenn sie sich farblich nicht abheben.`,
-          'rp': `Bei dieser Erkrankung stirbt die Netzhaut von außen nach innen ab. Das zentrale Sehen bleibt oft lange erhalten, aber man verliert den Überblick über den Raum. Man sieht die Welt buchstäblich wie durch ein Rohr. Unerwartete Hindernisse auf dem Boden werden zur enormen Stolperfalle. Ein festes <span onclick="checkVisionPw('rp')" style="cursor:pointer; color:inherit; font-weight:inherit;">Ordnungssystem</span> im Klassenzimmer ist absolut essenziell, damit Taschen und Stühle nicht zu ständigen Gefahrenquellen werden.`
+          'none': `Der Schulalltag ist voller visueller Reize. An der Tafel stehen wichtige Formeln, im Buch gibt es kleine Diagramme und auf dem Boden liegen oft Schulranzen im Weg. Für Menschen mit einer Sehbeeinträchtigung kann das ständige Fokussieren extrem anstrengend sein. Die Inklusion erfordert daher eine aufmerksame Raumgestaltung. Das erste versteckte Lösungswort lautet <span onclick="checkVisionPw('none')" style="cursor:pointer; color:inherit; font-weight:inherit; position:relative; z-index:10;">Barrierefreiheit</span>. Wer das findet, hat das Prinzip verstanden. Achten Sie auf gute Ausleuchtung.`,
+          'katarakt': `Eine Trübung der Linse führt dazu, dass alles wie durch einen dichten Nebel erscheint. Farben verblassen und grelles Licht blendet stark. Schwarze Schrift auf weißem Grund kann extrem unangenehm sein. Oft helfen nur invertierte Farben oder eine starke <span onclick="checkVisionPw('katarakt')" style="cursor:pointer; color:inherit; font-weight:inherit; position:relative; z-index:10;">Kontrastverstärkung</span> an Tafeln und Arbeitsblättern. Selbst große Objekte im Raum verschmelzen mit dem Hintergrund, wenn sie sich farblich nicht abheben.`,
+          'rp': `Bei dieser Erkrankung stirbt die Netzhaut von außen nach innen ab. Das zentrale Sehen bleibt oft lange erhalten, aber man verliert den Überblick über den Raum. Man sieht die Welt buchstäblich wie durch ein Rohr. Unerwartete Hindernisse auf dem Boden werden zur enormen Stolperfalle. Ein festes <span onclick="checkVisionPw('rp')" style="cursor:pointer; color:inherit; font-weight:inherit; position:relative; z-index:10;">Ordnungssystem</span> im Klassenzimmer ist absolut essenziell, damit Taschen und Stühle nicht zu ständigen Gefahrenquellen werden.`
       };
 
       function applyVisionInteractive(type) {
@@ -2071,12 +2592,31 @@
           fb.style.display = 'none';
           box.innerHTML = visionTexts[type];
 
-          if (type === 'none') {
-              box.style.filter = 'none'; box.style.clipPath = 'none';
-          } else if (type === 'katarakt') {
-              box.style.clipPath = 'none'; box.style.filter = 'blur(4px) contrast(0.6)';
+          box.style.filter = 'none'; 
+          box.style.clipPath = 'none';
+
+          if (type === 'katarakt') {
+              box.style.filter = 'blur(3px) contrast(0.6)';
           } else if (type === 'rp') {
-              box.style.filter = 'none'; box.style.clipPath = 'circle(50px at 50% 50%)'; 
+              box.style.clipPath = 'circle(60px at 50% 50%)'; 
+          }
+      }
+
+      function handleVisionReadingMove(e) {
+          if (currentVisionInteractive !== 'rp') return;
+          const box = document.getElementById('vision-reading-container');
+          if (!box) return;
+          const rect = box.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          box.style.clipPath = `circle(60px at ${x}px ${y}px)`;
+      }
+
+      function checkVisionPw(type) {
+          const fb = document.getElementById('vision-reading-feedback');
+          if(type === currentVisionInteractive) {
+              fb.style.display = 'block';
           }
       }
 

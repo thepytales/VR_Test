@@ -1,4 +1,4 @@
-const CACHE_NAME = 'elmeks-cache-v65'; 
+const CACHE_NAME = 'elmeks-cache-v68'; 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -12,6 +12,21 @@ const ASSETS_TO_CACHE = [
   './audio/speech.ogg',
   './audio/music.ogg',
   './audio/noise.ogg',
+  './audio/braille_click.ogg',
+  './audio/braille_success.ogg',
+  './audio/braille_error.ogg',
+  './videos/Input-Assistive_Technologien.webm',
+  './videos/captions_assistive.vtt',
+  './videos/Audiogramm_Video.webm',
+  './videos/captions_audiogramm.vtt',
+  './videos/Input_Tactonom_Reader_Showcase.webm',
+  './videos/captions_tactonom.vtt',
+  './videos/AVA_Lernvideo.webm',
+  './videos/captions_ava.vtt',
+  './videos/Video-Ursachen_und_Einflussfaktoren.webm',
+  './videos/captions_ursachen.vtt',
+  './videos/Input-Nonverbale_Kommunikation.webm',
+  './videos/captions_nonverbal.vtt',
   './manifest.json',
   './lib/jspdf.umd.min.js',
   './lib/jspdf.plugin.autotable.min.js',
